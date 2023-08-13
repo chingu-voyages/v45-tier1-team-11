@@ -13,9 +13,35 @@
     <main>
       <section class="search">
         <h2>Search Component</h2>
+        <form>
+          <label for="name" name="name">Meteorite Name:</label>
+          <input type="text" id="name">
+          <br>
+          <br>
+          <label for="year" name="year">Year:</label>
+          <input type="text" id="year">
+          <br>
+          <br>
+          <label for="year-of-strike" name="year-of-strike">Year of strike:</label>
+          <input type="text" id="year-of-strike">
+          <br>
+          <br>
+          <label for="meteorite-composition" name="meteorite-composition">Meteorite composition:</label>
+          <input type="text" id="meteorite-composition">
+          
+        </form>
+        <button class="search">search</button>
+        <button class="clear" type="reset">confirm</button>
       </section>
     </main>
     <footer></footer>
     <script src="app.js"></script>
   </body>
 </html>
+
+<!-- 
+ser will be able to filter data in the search component by any of the following:
+Name
+Year of strike
+Meteorite composition (recclass)
+Mass range (e.g. low to high, inclusiv -->
