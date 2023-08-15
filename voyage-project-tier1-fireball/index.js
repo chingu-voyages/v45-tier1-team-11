@@ -1,23 +1,28 @@
-const fs = require('fs');
+async function search(searchParams) {
+    const outputElement = document.getElementById('results');
+    try {
+        const response = await fetch('utils/meteorites.json');
+        const jsonData = await response.json();
+        
+        let meteorites = jsonData;
+        Object.keys(searchParams).forEach(parameter => {
+        const value = searchParams[parameter];
+        meteorites = meteorites.filter(meteorite =>
+            meteorite[parameter] ? meteorite[parameter] === value : false
+        );
+        });
 
-fs.readFile('utils/meteorites.json', 'utf8', (err, data) => {
-  if (err) {
-    console.error('Error reading file:', err);
-    return;
-  }
-
-  try {
-    const jsonData = JSON.parse(data);
-
-    const searchName = 'Aachen';
-    const meteorite = jsonData.find(item => item.name === searchName);
-
-    if (meteorite) {
-      console.log('Meteorite found:', meteorite);
-    } else {
-      console.log('Meteorite not found.');
+        outputElement.textContent = JSON.stringify(meteorites, null, 2);
+    } catch (error) {
+        console.error('Error:', error);
+        outputElement.textContent = 'Meteorites not found.';
     }
-  } catch (parseError) {
-    console.error('Error parsing JSON:', parseError);
-  }
+}
+
+const button = document.getElementById('searchButton');
+button.addEventListener('click', async () => {
+    const searchParams = {
+        reclat: '50.775000',
+    };
+    await search(searchParams);
 });
