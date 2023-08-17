@@ -13,21 +13,20 @@
     <main>
       <section class="search">
         <h2>Search for a Meteorite</h2>
-        <form>
-          <label for="name" name="name">Meteorite Name:</label>
-          <input type="text" id="name">
+        <form class="meteorite-search">
+            <select name="meteorite" id="met">
+              <option value="name">name</option>
+              <option value="year">year</option>
+              <option value="met-comp">meteorite composition</option>
+              <option value="mass">mass</option>
+            </select>
+      </form>
+<br>
+      <form class="search-box">
+        <input type="text" placeholder="type here">
+      </form>
+
           <br>
-          <br>
-          <label for="year" name="year">Year:</label>
-          <input type="text" id="year">
-          <br>
-          <br>
-          <label for="year-of-strike" name="year-of-strike">Year of strike:</label>
-          <input type="text" id="year-of-strike">
-          <br>
-          <br>
-          <label for="meteorite-composition" name="meteorite-composition">Meteorite composition:</label>
-          <input type="text" id="meteorite-composition"><br><br>
           <button type="clear" value="Clear">Clear</button>
           <button type="submit" value="Submit">Submit</button>
         </form>
@@ -38,10 +37,3 @@
     <script src="app.js"></script>
   </body>
 </html>
-
-<!-- 
-ser will be able to filter data in the search component by any of the following:
-Name
-Year of strike
-Meteorite composition (recclass)
-Mass range (e.g. low to high, inclusiv -->
