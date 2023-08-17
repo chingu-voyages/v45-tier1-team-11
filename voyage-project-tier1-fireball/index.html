@@ -1,43 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fireball</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <header>
-      <h1>Nasa Meteorite Strike Dashboard</h1>
-    </header>
-    <main>
-      <section class="search">
-        <h2>Search for a Meteorite</h2>
-        <form class="meteorite-search">
-            <select name="meteorite" id="met">
-              <option value="name">name</option>
-              <option value="year">year</option>
-              <option value="met-comp">meteorite composition</option>
-              <option value="mass">mass</option>
-            </select>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fireball</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header>
+    <h1>Nasa Meteorite Strike Dashboard</h1>
+  </header>
+  <main>
+    <section class="search">
+      <h2>Search for a Meteorite</h2>
+      <form class="meteorite-search">
+        <label for="met">Search by:</label>
+        <select name="meteorite" id="met">
+          <option value="name">name</option>
+          <option value="year">year</option>
+          <option value="recclass">meteorite composition</option>
+          <option value="mass">mass</option>
+        </select>
+        <br>
+        <br>
+        <label for="searchBox">Enter value:</label>
+        <input type="text" id="searchBox" placeholder="type here">
+        <br>
+        <br>
+        <button type="button" id="clearButton">Clear</button>
+        <button type="button" id="submitButton">Submit</button>
       </form>
-<br>
-      <form class="search-box">
-        <input type="text" placeholder="type here">
-      </form>
-
-          <br>
-          <button type="clear" value="Clear">Clear</button>
-          <button type="submit" value="Submit">Submit</button>
-        </form>
-
-      </section>
-    </main>
-    <footer>
-        <div class="footer-logo">
-            <a href="https://github.com/chingu-voyages/v45-tier1-team-11" target="_blank"><img src="assets/github.png" style="width: 40px" alt="GitHub"></a>
-        </div>
-    </footer>
-    <script src="app.js"></script>
-  </body>
+    </section>
+  </main>
+  <footer>
+    <div class="footer-logo">
+      <a href="https://github.com/chingu-voyages/v45-tier1-team-11" target="_blank"><img src="assets/github.png" style="width: 40px" alt="GitHub"></a>
+    </div>
+  </footer>
+  <script src="app.js"></script>
+</body>
 </html>
