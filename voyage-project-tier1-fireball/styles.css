@@ -11,3 +11,25 @@ header {
 }
 form {
 }
+
+/* To style footer: */
+body, html {
+    height: 100%;
+}
+  
+body {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+  
+footer {
+    position: absolute;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+    flex-shrink: 0;
+    text-align: center;
+    padding: 10px 0;
+  }
+  
