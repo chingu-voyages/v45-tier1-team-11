@@ -9,6 +9,8 @@ async function initialise() {
         
         let meteorites = jsonData;
         outputElement.textContent = JSON.stringify(meteorites, null, 2);
+        var filters = document.getElementById('filters');
+        filters.innerHTML = "";
     } catch (error) {
         console.error('Error:', error);
         outputElement.textContent = 'Meteorites not found.';
@@ -73,8 +75,12 @@ selectOption.addEventListener("change", function() {
 function search(searchParams) {
     const outputElement = document.getElementById('results');
     let meteorites = JSON.parse(outputElement.textContent);
+    var filters = document.getElementById('filters');
+    var textElement = document.createElement("p");
     Object.keys(searchParams).forEach(parameter => {
         const value = searchParams[parameter];
+        textElement.textContent = `${parameter}: ${value}`;
+        filters.appendChild(textElement);
         if (parameter == 'year') {
             meteorites = meteorites.filter(meteorite =>
                 meteorite[parameter] ? meteorite[parameter].substring(0, 4) === value : false
