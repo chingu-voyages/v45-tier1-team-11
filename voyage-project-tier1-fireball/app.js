@@ -54,11 +54,17 @@ async function search(searchParams) {
     }
 }
 
-const button = document.getElementById('searchButton');
-button.addEventListener('click', async () => {
+const buttonSearch = document.getElementById('searchButton');
+buttonSearch.addEventListener('click', async () => {
     var selectedOption = document.getElementById("met").value;
     var enteredText = document.getElementById("textInput").value;
     const searchParams = {};
     searchParams[selectedOption] = enteredText;
+    await search(searchParams);
+});
+
+const buttonClear = document.getElementById('clearButton');
+buttonClear.addEventListener('click', async () => {
+    const searchParams = {};
     await search(searchParams);
 });
