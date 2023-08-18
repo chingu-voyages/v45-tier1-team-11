@@ -17,6 +17,59 @@ async function initialise() {
 
 initialise();
 
+var selectOption = document.getElementById("met");
+var dynamicField = document.getElementById("dynamicField");
+
+var inputField = document.createElement("input");
+inputField.type = "text";
+inputField.id = "input";
+inputField.placeholder = "Enter text";
+dynamicField.appendChild(inputField);
+
+selectOption.addEventListener("change", function() {
+    var selectedValue = selectOption.value;
+    
+    dynamicField.innerHTML = ""; // Clear previous content
+    
+    if (selectedValue === "mass") {
+        var selectField = document.createElement("select");
+        selectField.id = "input";
+        
+        var option1 = document.createElement("option");
+        option1.value = "very low";
+        option1.textContent = "very low";
+        selectField.appendChild(option1);
+        
+        var option2 = document.createElement("option");
+        option2.value = "low";
+        option2.textContent = "low";
+        selectField.appendChild(option2);
+
+        var option3 = document.createElement("option");
+        option3.value = "medium";
+        option3.textContent = "medium";
+        selectField.appendChild(option3);
+
+        var option4 = document.createElement("option");
+        option4.value = "high";
+        option4.textContent = "high";
+        selectField.appendChild(option4);
+
+        var option5 = document.createElement("option");
+        option5.value = "very high";
+        option5.textContent = "very high";
+        selectField.appendChild(option5);
+        
+        dynamicField.appendChild(selectField);
+    } else {
+        var inputField = document.createElement("input");
+        inputField.type = "text";
+        inputField.id = "input";
+        inputField.placeholder = "Enter text";
+        dynamicField.appendChild(inputField);
+    }
+});
+
 function search(searchParams) {
     const outputElement = document.getElementById('results');
     let meteorites = JSON.parse(outputElement.textContent);
@@ -61,9 +114,9 @@ function search(searchParams) {
 const buttonSearch = document.getElementById('searchButton');
 buttonSearch.addEventListener('click', () => {
     var selectedOption = document.getElementById("met").value;
-    var enteredText = document.getElementById("textInput").value;
+    var input = document.getElementById("input").value;
     const searchParams = {};
-    searchParams[selectedOption] = enteredText;
+    searchParams[selectedOption] = input;
     search(searchParams);
 });
 
