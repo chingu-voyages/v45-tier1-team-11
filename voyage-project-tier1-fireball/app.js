@@ -8,6 +8,7 @@ async function search(searchParams) {
         const jsonData = await response.json();
         
         let meteorites = jsonData;
+        // To get a list of meteorite composition types:
         // let recclass = [];
         // meteorites.forEach(meteorite => recclass.push(meteorite.recclass));
         // const recclasss = Array.from(new Set(recclass)).sort();
