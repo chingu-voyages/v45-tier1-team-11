@@ -1,12 +1,15 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #003896;
+  background-color: white;
+  text-align: center;
 }
 header {
-  color: #ffffff;
+  color: black;
   text-align: center;
   padding: 10px;
+}
+form {
 }
 
 /* To style footer: */
