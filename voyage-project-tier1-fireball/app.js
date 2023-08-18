@@ -54,24 +54,11 @@ async function search(searchParams) {
     }
 }
 
-// const button = document.getElementById('searchButton');
-// button.addEventListener('click', async () => {
-//     const searchParams = {
-//         mass: 'very low',
-//     };
-//     await search(searchParams);
-// });
-
-
-document.getElementById("meteoriteSearchForm").addEventListener("submit", function(event) {
-    event.preventDefault(); // Prevent the default form submission
-    
+const button = document.getElementById('searchButton');
+button.addEventListener('click', async () => {
     var selectedOption = document.getElementById("met").value;
     var enteredText = document.getElementById("textInput").value;
-    
-    const outputElement = document.getElementById('results');
-    outputElement.textContent = `${selectedOption}, ${enteredText}`;
-    
-    // Reset the form after processing
-    this.reset();
+    const searchParams = {};
+    searchParams[selectedOption] = enteredText;
+    await search(searchParams);
 });
