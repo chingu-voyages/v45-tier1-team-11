@@ -54,10 +54,33 @@ async function search(searchParams) {
     }
 }
 
-const button = document.getElementById('searchButton');
-button.addEventListener('click', async () => {
+// const button = document.getElementById('searchButton');
+// button.addEventListener('click', async () => {
+//     const searchParams = {
+//         mass: 'very low',
+//     };
+//     await search(searchParams);
+// });
+
+
+const meteoriteSearchForm = document.getElementById("meteoriteSearchForm");
+const searchBoxForm = document.getElementById("searchBoxForm");
+
+meteoriteSearchForm.addEventListener("submit", function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    const selectedOption = meteoriteSearchForm.querySelector("#met").value;
+    console.log("Selected option:", selectedOption);
+});
+
+searchBoxForm.addEventListener("submit", async function (event) {
+    event.preventDefault(); // Prevent the form from submitting
+
+    const searchInput = searchBoxForm.querySelector("input[type='text']").value;
+    console.log("Search input:", searchInput);
+
     const searchParams = {
-        mass: 'very low',
+        selectedOption: searchInput,
     };
     await search(searchParams);
 });
