@@ -9,23 +9,19 @@ header {
   text-align: center;
   padding: 10px;
 }
-form {
-}
 
 /* To style footer: */
 body, html {
     height: 100%;
+    margin: 0;
+    padding: 0;
 }
-  
-body {
-    display: flex;
-    flex-direction: column;
-    position: relative;
+
+main {
+    min-height: 70%;
 }
   
 footer {
-    position: fixed;
-    bottom: 0;
     height: 40px;
     width: 100%;
     flex-shrink: 0;
