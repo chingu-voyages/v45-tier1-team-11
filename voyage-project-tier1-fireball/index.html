@@ -13,30 +13,39 @@
     <main>
       <section class="search">
         <h2>Search for a Meteorite</h2>
-        <form class="meteorite-search">
-            <select name="meteorite" id="met">
-              <option value="name">name</option>
-              <option value="year">year</option>
-              <option value="recclass">meteorite composition</option>
-              <option value="mass">mass</option>
-            </select>
-      </form>
-<br>
-      <form class="search-box">
-        <input type="text" placeholder="type here">
-
-          <br>
-          <button class="clear" type="reset">Clear</button>
-          <button type="submit">Submit</button>
-      </form>
-
+        <select name="meteorite" id="met">
+          <option value="name">name</option>
+          <option value="year">year</option>
+          <option value="recclass">meteorite composition</option>
+          <option value="mass">mass</option>
+        </select>
+        <br /><br />
+        <div class="summary-metrics">
+       
+        <div id="dynamicField"></div>
+        <br />
+        <button id="clearButton">Clear</button>
+        <button id="searchButton">Search</button>
       </section>
+      <div id="filters"></div>
+      <h2>Summary Metrics</h2>
+      <p>Total number of strikes: <span id="totalStrikes">0</span></p>
+      <p>Average mass: <span id="averageMass">0</span></p>
+      <div id="yearHistogram" class="chart"></div>
+      <div id="compositionHistogram" class="chart"></div>
+    </div>
+      <div id="results" style="color: black"></div>
     </main>
     <footer>
-        <div class="footer-logo">
-            <a href="https://github.com/chingu-voyages/v45-tier1-team-11" target="_blank"><img src="utils/images/github.png" style="width: 40px" alt="GitHub"></a>
-        </div>
+      <div class="footer-logo">
+        <a
+          href="https://github.com/chingu-voyages/v45-tier1-team-11"
+          target="_blank"
+          ><img src="utils/images/github.png" style="width: 40px" alt="GitHub"
+        /></a>
+      </div>
     </footer>
     <script src="app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </body>
 </html>
