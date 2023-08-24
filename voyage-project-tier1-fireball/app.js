@@ -159,27 +159,27 @@ selectOption.addEventListener("change", function () {
 
     var option1 = document.createElement("option");
     option1.value = "very low";
-    option1.textContent = "very low";
+    option1.textContent = "very low (< 100 g)";
     selectField.appendChild(option1);
 
     var option2 = document.createElement("option");
     option2.value = "low";
-    option2.textContent = "low";
+    option2.textContent = "low (100-1000 g)";
     selectField.appendChild(option2);
 
     var option3 = document.createElement("option");
     option3.value = "medium";
-    option3.textContent = "medium";
+    option3.textContent = "medium (1000-10000 g)";
     selectField.appendChild(option3);
 
     var option4 = document.createElement("option");
     option4.value = "high";
-    option4.textContent = "high";
+    option4.textContent = "high (10000-100000 g)";
     selectField.appendChild(option4);
 
     var option5 = document.createElement("option");
     option5.value = "very high";
-    option5.textContent = "very high";
+    option5.textContent = "very high (> 100000 g)";
     selectField.appendChild(option5);
 
     dynamicField.appendChild(selectField);
