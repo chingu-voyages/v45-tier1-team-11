@@ -4,18 +4,13 @@ body {
   background-color: white;
   text-align: center;
 }
+
 header {
   color: black;
   text-align: center;
   padding: 10px;
 }
 
-/* To style footer: */
-body, html {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
 
 main {
     min-height: 70%;
@@ -27,5 +22,21 @@ footer {
     flex-shrink: 0;
     text-align: center;
     padding: 10px 0;
+
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    text-align: center;
   }
+
+  
+  /* To style footer: */
+  body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+  }
+
+    
+
   
