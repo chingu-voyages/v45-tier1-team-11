@@ -120,6 +120,95 @@ const recclass = [
   "Winonaite",
 ];
 
+let yearChart = null;
+let compositionChart = null;
+
+function createHistogram(data, labels, chartId, chartTitle) {
+  const ctx = document.getElementById(chartId).getContext("2d");
+
+  return new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: chartTitle,
+          data: data,
+          backgroundColor: "rgba(20, 45, 76, 1)",
+          borderColor: "rgba(20, 45, 76, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+
+function updateYearHistogram(meteorites) {
+  const years = meteorites.map((meteorite) =>
+    new Date(meteorite.year).getFullYear()
+  );
+  const yearCounts = {};
+
+  years.forEach((year) => {
+    if (yearCounts[year]) {
+      yearCounts[year]++;
+    } else {
+      yearCounts[year] = 1;
+    }
+  });
+
+  const sortedYears = Object.keys(yearCounts).sort((a, b) => a - b);
+  const yearData = sortedYears.map((year) => yearCounts[year]);
+
+  if (yearChart) {
+    yearChart.destroy(); // Destroy the previous chart instance
+  }
+
+  yearChart = createHistogram(
+    yearData,
+    sortedYears,
+    "yearHistogram",
+    "Number of Strikes by Year"
+  );
+}
+
+// Function to update the composition histogram
+function updateCompositionHistogram(meteorites) {
+  const compositionCounts = {};
+
+  meteorites.forEach((meteorite) => {
+    const composition = meteorite.recclass;
+    if (compositionCounts[composition]) {
+      compositionCounts[composition]++;
+    } else {
+      compositionCounts[composition] = 1;
+    }
+  });
+
+  const sortedCompositions = Object.keys(compositionCounts).sort();
+  const compositionData = sortedCompositions.map(
+    (composition) => compositionCounts[composition]
+  );
+
+  if (compositionChart) {
+    compositionChart.destroy(); // Destroy the previous chart instance
+  }
+
+  compositionChart = createHistogram(
+    compositionData,
+    sortedCompositions,
+    "compositionHistogram",
+    "Number of Strikes by Meteorite Composition"
+  );
+}
+
 async function initialise() {
   const outputElement = document.getElementById("results");
   try {
@@ -131,6 +220,8 @@ async function initialise() {
     var filters = document.getElementById("filters");
     filters.innerHTML = "";
     updateSummaryMetrics(meteorites);
+    updateYearHistogram(meteorites);
+    updateCompositionHistogram(meteorites);
   } catch (error) {
     console.error("Error:", error);
     outputElement.textContent = "Meteorites not found.";
@@ -247,6 +338,8 @@ function search(searchParams) {
     }
   });
   updateSummaryMetrics(meteorites);
+  updateYearHistogram(meteorites);
+  updateCompositionHistogram(meteorites);
   outputElement.textContent = JSON.stringify(meteorites, null, 2);
 }
 
