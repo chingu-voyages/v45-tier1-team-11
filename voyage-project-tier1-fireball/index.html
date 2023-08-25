@@ -25,17 +25,18 @@
           <br />
           <button id="clearButton">Clear</button>
           <button id="searchButton">Search</button>
+        </section>
           <div id="filters"></div>
           <h2>Summary Metrics</h2>
           <p>Total number of strikes: <span id="totalStrikes">0</span></p>
           <p>Average mass: <span id="averageMass">0</span></p>
           <div id="results" style="color: black"></div>
-          //Year Histogram Chart (for Chart.js)
+          
           <div><canvas id="yearHistogram" class="chart"></canvas></div>
-          //Composition Histogram Chart (for Chart.js)
+          
           <div><canvas id="compositionHistogram" class="chart"></canvas></div>
         </div>
-      </section>
+      
     </main>
     <footer>
       <div class="footer-logo">
@@ -47,7 +48,6 @@
       </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    //
     <script src="app.js"></script>
   </body>
 </html>
