@@ -219,6 +219,28 @@ function updateCompositionHistogram(meteorites) {
   );
 }
 
+// This function calculates and updates summary metrics based on filtered meteorite data.
+async function updateSummaryMetrics(meteorites) {
+  const totalStrikesElement = document.getElementById("totalStrikes");
+  const averageMassElement = document.getElementById("averageMass");
+
+  // Calculating the total number of meteorite strikes.
+  const totalStrikes = meteorites.length;
+  // Calculating the total mass of meteorites, considering valid mass values.
+  const totalMass = meteorites.reduce((sum, meteorite) => {
+    if (meteorite.mass && !isNaN(parseFloat(meteorite.mass))) {
+      return sum + parseFloat(meteorite.mass);
+    }
+    return sum;
+  }, 0);
+
+  // Calculating the average mass of meteorites.
+  const averageMass = totalMass / totalStrikes;
+  // Updating HTML elements with calculated metrics
+  totalStrikesElement.textContent = totalStrikes;
+  averageMassElement.textContent = averageMass.toFixed(2);
+}
+
 // This async function initializes the web application
 async function initialise() {
   // Get the HTML element with the ID "results" and store it in the outputElement variable
@@ -298,21 +320,25 @@ selectOption.addEventListener("change", function () {
   }
 });
 
+// This function is responsible for filtering meteorites based on user-provided search parameters.
 function search(searchParams) {
   const outputElement = document.getElementById("results");
-  let meteorites = JSON.parse(outputElement.textContent);
+  let meteorites = JSON.parse(outputElement.textContent); // Parse the JSON data of meteorites stored in the output element.
   var filters = document.getElementById("filters");
   var textElement = document.createElement("p");
   Object.keys(searchParams).forEach((parameter) => {
+    // Loop through each search parameter provided by the user.
     const value = searchParams[parameter];
-    textElement.textContent = `${parameter}: ${value}`;
-    filters.appendChild(textElement);
+    textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
+    filters.appendChild(textElement); // Append the filter criteria to the filters element.
+    // Check the search parameter and apply the corresponding filter.
     if (parameter == "year") {
       meteorites = meteorites.filter((meteorite) =>
         meteorite[parameter]
           ? meteorite[parameter].substring(0, 4) === value
           : false
       );
+      // Apply mass range filters based on user-provided values.
     } else if (parameter == "mass") {
       if (value === "very low") {
         meteorites = meteorites.filter((meteorite) =>
@@ -346,33 +372,18 @@ function search(searchParams) {
             : false
         );
       }
+      // Apply filters for other search parameters.
     } else {
       meteorites = meteorites.filter((meteorite) =>
         meteorite[parameter] ? meteorite[parameter] === value : false
       );
     }
   });
+  //Updating Metrict and Histograms
   updateSummaryMetrics(meteorites);
   updateYearHistogram(meteorites);
   updateCompositionHistogram(meteorites);
-  outputElement.textContent = JSON.stringify(meteorites, null, 2);
-}
-
-async function updateSummaryMetrics(meteorites) {
-  const totalStrikesElement = document.getElementById("totalStrikes");
-  const averageMassElement = document.getElementById("averageMass");
-
-  const totalStrikes = meteorites.length;
-  const totalMass = meteorites.reduce((sum, meteorite) => {
-    if (meteorite.mass && !isNaN(parseFloat(meteorite.mass))) {
-      return sum + parseFloat(meteorite.mass);
-    }
-    return sum;
-  }, 0);
-  const averageMass = totalMass / totalStrikes;
-
-  totalStrikesElement.textContent = totalStrikes;
-  averageMassElement.textContent = averageMass.toFixed(2);
+  outputElement.textContent = JSON.stringify(meteorites, null, 2); // Display the filtered meteorites in the output element as formatted JSON.
 }
 
 const buttonSearch = document.getElementById("searchButton");
@@ -381,7 +392,7 @@ buttonSearch.addEventListener("click", () => {
   var input = document.getElementById("input").value;
   const searchParams = {};
   searchParams[selectedOption] = input;
-  search(searchParams);
+  search(searchParams); // Calling search function to filter meteorite data based on the user input.
 });
 
 const buttonClear = document.getElementById("clearButton");
