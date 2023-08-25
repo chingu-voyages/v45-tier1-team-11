@@ -1,4 +1,5 @@
-// To add to the form, meteorite composition:
+// recclass is an array containing all the possible meteorite compositions.
+
 const recclass = [
   "Acapulcoite",
   "Achondrite-ung",
@@ -120,9 +121,11 @@ const recclass = [
   "Winonaite",
 ];
 
+// Create the year and composition histogram charts
 let yearChart = null;
 let compositionChart = null;
 
+//Function to generate a Chart.js histograms
 function createHistogram(data, labels, chartId, chartTitle) {
   const ctx = document.getElementById(chartId).getContext("2d");
 
@@ -149,28 +152,32 @@ function createHistogram(data, labels, chartId, chartTitle) {
     },
   });
 }
-
+//Function to update the Year Histogram
 function updateYearHistogram(meteorites) {
+  // Extract the years from the meteorite data
   const years = meteorites.map((meteorite) =>
     new Date(meteorite.year).getFullYear()
   );
+  // Create an object, to store the amount of meteorites for each year
   const yearCounts = {};
-
+  // Loop through the years and count the number of meteorites for each year
   years.forEach((year) => {
     if (yearCounts[year]) {
-      yearCounts[year]++;
+      yearCounts[year]++; // If the year exists in our object we increment the count
     } else {
-      yearCounts[year] = 1;
+      yearCounts[year] = 1; // If the year doesn't exist, initialize it with a count of 1
     }
   });
 
+  // Sorting the years in the ascending order
   const sortedYears = Object.keys(yearCounts).sort((a, b) => a - b);
+  // Creating an array of meteorite counts, that corresponds to the sorted years
   const yearData = sortedYears.map((year) => yearCounts[year]);
 
   if (yearChart) {
-    yearChart.destroy(); // Destroy the previous chart instance
+    yearChart.destroy(); // Destroy the previous chart, if its exists
   }
-
+  // Creating a new year histogram chart using the updated data
   yearChart = createHistogram(
     yearData,
     sortedYears,
@@ -181,26 +188,29 @@ function updateYearHistogram(meteorites) {
 
 // Function to update the composition histogram
 function updateCompositionHistogram(meteorites) {
+  // Create an object, to store the amount of meteorites for each composition
   const compositionCounts = {};
 
   meteorites.forEach((meteorite) => {
     const composition = meteorite.recclass;
+    // Loop through the meteorites and count the number of occurrences for each composition
     if (compositionCounts[composition]) {
       compositionCounts[composition]++;
     } else {
       compositionCounts[composition] = 1;
     }
   });
-
+  // Sorting compositions in an alphabetical order
   const sortedCompositions = Object.keys(compositionCounts).sort();
+  // Create an array of meteorite counts corresponding to the sorted compositions
   const compositionData = sortedCompositions.map(
     (composition) => compositionCounts[composition]
   );
 
   if (compositionChart) {
-    compositionChart.destroy(); // Destroy the previous chart instance
+    compositionChart.destroy(); // Destroy the previous chart, if its exists
   }
-
+  // Creating a new composition histogram chart using the updated data
   compositionChart = createHistogram(
     compositionData,
     sortedCompositions,
@@ -209,16 +219,20 @@ function updateCompositionHistogram(meteorites) {
   );
 }
 
+// This async function initializes the web application
 async function initialise() {
+  // Get the HTML element with the ID "results" and store it in the outputElement variable
   const outputElement = document.getElementById("results");
-  try {
-    const response = await fetch("utils/meteorites.json");
-    const jsonData = await response.json();
 
-    let meteorites = jsonData;
+  try {
+    const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
+    const jsonData = await response.json(); // Parse the response data as JSON
+
+    let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
     outputElement.textContent = JSON.stringify(meteorites, null, 2);
-    var filters = document.getElementById("filters");
+    var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
     filters.innerHTML = "";
+    // Call functions to update summary metrics, year histogram, and composition histogram
     updateSummaryMetrics(meteorites);
     updateYearHistogram(meteorites);
     updateCompositionHistogram(meteorites);
@@ -229,23 +243,24 @@ async function initialise() {
 }
 
 initialise();
-
+// Get HTML elements with the IDs "met" and "dynamicField"
 var selectOption = document.getElementById("met");
 var dynamicField = document.getElementById("dynamicField");
-
+// Create an input field dynamically and set its attributes
 var inputField = document.createElement("input");
 inputField.type = "text";
 inputField.id = "input";
 inputField.placeholder = "Enter text";
-dynamicField.appendChild(inputField);
+dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
 
 selectOption.addEventListener("change", function () {
+  // Add an event listener to the "met"
   var selectedValue = selectOption.value;
 
   dynamicField.innerHTML = ""; // Clear previous content
 
   if (selectedValue === "mass") {
-    var selectField = document.createElement("select");
+    var selectField = document.createElement("select"); // Create a select field dynamically with options for mass
     selectField.id = "input";
 
     var option1 = document.createElement("option");
@@ -273,13 +288,13 @@ selectOption.addEventListener("change", function () {
     option5.textContent = "very high";
     selectField.appendChild(option5);
 
-    dynamicField.appendChild(selectField);
+    dynamicField.appendChild(selectField); // Append the select field to the "dynamicField" element
   } else {
-    var inputField = document.createElement("input");
+    var inputField = document.createElement("input"); // Create a text input field for other options
     inputField.type = "text";
     inputField.id = "input";
     inputField.placeholder = "Enter text";
-    dynamicField.appendChild(inputField);
+    dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
   }
 });
 
