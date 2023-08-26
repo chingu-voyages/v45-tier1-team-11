@@ -249,7 +249,7 @@ function search(searchParams) {
       }
     } else {
       meteorites = meteorites.filter((meteorite) =>
-        meteorite[parameter] ? meteorite[parameter] === value : false
+        meteorite[parameter] ? meteorite[parameter].toLowerCase() === value.toLowerCase() : false
       );
     }
   });
