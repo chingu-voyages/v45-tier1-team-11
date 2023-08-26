@@ -37,6 +37,16 @@ footer {
       padding: 0;
   }
 
-    
+/* To style autocompletion: */
+.input {
+    position: relative;
+}
 
-  
+.autocomplete-results {
+    position: absolute;
+    z-index: 1000;
+    top: 40%;
+    right: 45%;
+    color: black;
+    background-color: white;
+}
