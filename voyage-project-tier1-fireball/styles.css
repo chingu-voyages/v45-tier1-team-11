@@ -38,15 +38,15 @@ footer {
   }
 
 /* To style autocompletion: */
-.input {
+#input {
     position: relative;
 }
 
 .autocomplete-results {
     position: absolute;
-    z-index: 1000;
-    top: 40%;
-    right: 45%;
-    color: black;
-    background-color: white;
+    z-index: 1;
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    max-height: 150px;
+    overflow-y: auto;
 }
