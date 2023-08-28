@@ -49,4 +49,6 @@ footer {
     border: 1px solid #ccc;
     max-height: 150px;
     overflow-y: auto;
+    left: 50%;
+    transform: translateX(-50%);
 }
