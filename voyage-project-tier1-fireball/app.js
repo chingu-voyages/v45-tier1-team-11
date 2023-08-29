@@ -1,3 +1,4 @@
+// Parameters values (name, composition type):
 const names1 = ["Aachen", "Aarhus", "Abee", "Acapulco", "Achiras", "Adhi Kot", "Adzhi-Bogdo (stone)", "Agen", "Aguada", "Aguila Blanca", "Aioun el Atrouss", "Aïr", "Aire-sur-la-Lys", "Akaba", "Akbarpur", "Akwanga", "Akyumak", "Al Rais", "Al Zarnkh", "Alais", "Albareto", "Alberta", "Alby sur Chéran", "Aldsworth", "Aleppo", "Alessandria", "Alexandrovsky", "Alfianello", "Allegan", "Allende", "Almahata Sitta", "Alta'ameem", "Ambapur Nagla", "Andhara", "Andover", "Andreevka", "Andura", "Northwest Africa 5815", "Angers", "Angra dos Reis (stone)", "Ankober", "Anlong", "Aomori", "Appley Bridge", "Apt", "Arbol Solo", "Archie", "Arroyo Aguiar", "Asco", "Ash Creek", "Ashdon", "Assisi", "Atarra", "Atemajac", "Athens", "Atoka", "Aubres", "Aumale", "Aumieres", "Ausson", "Avanhandava", "Avce", "Avilez", "Awere", "Aztec", "Bachmut", "Bahjoi", "Bald Mountain", "Baldwyn", "Bali", "Ban Rong Du", "Bandong", "Bansur", "Banswal", "Banten", "Barbotan", "Barcelona (stone)", "Barea", "Barnaul", "Barntrup", "Baroti", "Barwell", "Bassikounou", "Baszkówka", "Bath", "Bath Furnace", "Battle Mountain", "Bawku", "Baxter", "Beardsley", "Beaver Creek", "Beddgelert", "Bells", "Belville", "Benares (a)", "Benguerir", "Beni M'hira", "Benld", "Benoni", "Bensour", "Benton", "Berduc", "Béréba", "Berlanguillas", "Berthoud", "Bethlehem", "Beuste", "Beyrout", "Bhagur", "Bhawad", "Bherai", "Bhola", "Bholghati", "Bialystok", "Bielokrynitschie", "Bilanga", "Binningup", "Birni N'konni", "Bishopville", "Bishunpur", "Bjelaja Zerkov", "Bjurböle", "Black Moshannan Park", "Blackwell", "Blanket", "Blansko", "Bloomington", "Bo Xian", "Bocas", "Bogou", "Boguslavka", "Borgo San Donino", "Bori", "Boriskino", "Borkut", "Borodino", "Botschetschki", "Boumdeid (2003)", "Boumdeid (2011)", "Bovedy", "Bradford Woods", "Braunau", "Breitscheid", "Bremervörde", "Brient", "Bruderheim", "Bukhara", "Bulls Run", "Bunburra Rockhole", "Bununu", "Bur-Gheluai", "Burnwell", "Bursa", "Buschhof", "Bustee", "Butsura", "Buzzard Coulee", "Cabezo de Mayo", "Cabin Creek", "Cacak", "Cali", "Calivo", "Campos Sales", "Çanakkale", "Cañellas", "Cangas de Onis", "Canon City", "Cape Girardeau", "Capilla del Monte", "Carancas", "Caratash", "Castalia", "Castel Berardenga", "Castine", "Castrovillari", "Caswell County", "Ceniceros", "Centerville", "Cereseto", "Chadong", "Chail", "Chainpur", "Chajari", "Chandakapur", "Chandpur", "Changde", "Chantonnay", "Charlotte", "Charsonville", "Charwallas", "Chassigny", "Château-Renard", "Chaves", "Chela"];
 const names2 = ["Chelyabinsk", "Chergach ", "Chernyi Bor", "Cherokee Springs", "Chervettaz", "Chervony Kut", "Chetrinahatti", "Chiang Khan", "Chicora", "Chisenga", "Chitado", "Chitenay", "Cilimus", "Claxton", "Clohars", "Colby (Wisconsin)", "Cold Bokkeveld", "Coleman", "Collescipoli", "Conquista", "Cosina", "Cranganore", "Crescent", "Cronstad", "Cross Roads", "Crumlin", "Cumberland Falls", "Cynthiana", "Dahmani", "Dandapur", "Daniel's Kuil", "Danville", "Darmstadt", "Dashoguz", "Daule", "De Cewsville", "Deal", "Delhi", "Demina", "Denver", "Dergaon", "Desuri", "Devgaon", "Devri-Khera", "Dhajala", "Dharwar", "Dhurmsala", "Didim", "Diep River", "Distrito Quebracho", "Djati-Pengilon", "Djermaia", "Djoumine", "Dokachi", "Dolgovoli", "Domanitch", "Dong Ujimqin Qi", "Donga Kohrod", "Dongtai", "Doroninsk", "Dosso", "Douar Mghila", "Dowa", "Drake Creek", "Dresden (Ontario)", "Dubrovnik", "Dunbogan", "Dundrum", "Dunhua", "Durala", "Duruma", "Duwun", "Dwaleni", "Dyalpur", "Dyarrl Island", "Eagle", "Ehole", "Eichstädt", "Ekeby", "Ekh Khera", "El Idrissia", "El Paso de Aguila", "El Tigre", "Elbert", "Elbogen", "Elenovka", "Ellemeet", "Emmaville", "Enshi", "Ensisheim", "Épinal", "Erakot", "Erevan", "Ergheo", "Erxleben", "Esnandes", "Essebi", "Estherville", "Farmington", "Farmville", "Favars", "Fayetteville", "Feid Chair", "Felix", "Fenghsien-Ku", "Ferguson", "Fermo", "Fisher", "Florence", "Forest City", "Forest Vale", "Forksville", "Forsbach", "Forsyth", "Fort Flatters", "Frankfort (stone)", "Fuhe", "Fukutomi", "Fünen", "Futtehpur", "Fuyang", "Galapian", "Galim (a)", "Galim (b)", "Galkiv", "Gambat", "Gao-Guenie", "Garhi Yasin", "Garland", "Gashua", "Gasseltepaoua", "Geidam", "Gifu", "Girgenti", "Git-Git", "Glanerbrug", "Glanggang", "Glasatovo", "Glatton", "Gnadenfrei", "Gopalpur", "Gorlovka", "Granes", "Grefsheim", "Grimsby", "Grosnaja", "Gross-Divina", "Grossliebenthal", "Grüneberg", "Grzempach", "Gualeguaychú", "Guangmingshan", "Guangnan", "Guangrao", "Guareña", "Guêa", "Guibga", "Guidder", "Gujargaon", "Gujba", "Gumoschnik", "Gurram Konda", "Gursum", "Gütersloh", "Gyokukei", "Hachi-oji", "Hainaut", "Hallingeberg", "Hamlet", "Haraiya", "Haripura", "Harleton", "Harrison County", "Hashima", "Hassi-Jekna", "Hatford", "Haverö", "Hedeskoga", "Hedjaz", "Heredia", "Hessle", "Higashi-koen", "High Possil", "Hiroshima", "Hoima", "Hökmark", "Holbrook", "Holetta", "Homestead", "Honolulu", "Hotse", "Hoxie", "Hraschina", "Huaxi", "Hungen", "Hvittis", "Ibbenbüren", "Ibitira"];
 const names3 = ["Ibrisim", "Ichkala", "Idutywa", "Iguaracu", "Ijopega", "Indarch", "Independence", "Inner Mongolia", "Innisfree", "Ipiranga", "Ishinga", "Isthilart", "Itapicuru-Mirim", "Itqiy", "Ivuna", "Jackalsfontein", "Jajh deh Kot Lalu", "Jalanash", "Jalandhar", "Jamkheir", "Jartai", "Jelica", "Jemlapur", "Jesenice", "Jhung", "Jiange", "Jianshi", "Jilin", "Jodiya", "Jodzie", "Johnstown", "Jolomba", "Jonzac", "Juancheng", "Judesegeri", "Jumapalo", "Junan", "Juromenha", "Juvinas", "Kaba", "Kabo", "Kadonah", "Kaee", "Kagarlyk", "Kaidun", "Kainsaz", "Kakangari", "Kakowa", "Kalaba", "Kalumbi", "Kamalpur", "Kamiomi", "Kamsagar", "Kandahar (Afghanistan)", "Kangean", "Kangra Valley", "Kapoeta", "Kaprada", "Kaptal-Aryk", "Karakol", "Karatu", "Karewar", "Karkh", "Karloowala", "Karoonda", "Kasamatsu", "Kasauli", "Katagum", "Kavarpura", "Kayakent", "Kediri", "Kemer", "Kendleton", "Kendrapara", "Kerilis", "Kernouve", "Kesen", "Khairpur", "Khanpur", "Kharkov", "Kheragur", "Khetri", "Khmelevka", "Khohar", "Khor Temiki", "Kidairat", "Kiel", "Kiffa", "Kijima (1906)", "Kikino", "Kilabo", "Kilbourn", "Killeter", "Kingai", "Kirbyville", "Kisvarsány", "Kitchener", "Klein-Wenden", "Knyahinya", "Kobe", "Kokubunji", "Komagome", "Konovo", "Košice", "Krähenberg", "Krasnoi-Ugol", "Krasnyi Klyuch", "Krutikha", "Krymka", "Kukschin", "Kulak", "Kuleschovka", "Kulp", "Kunashak", "Kunya-Urgench", "Kushiike", "Kusiali", "Kutais", "Kuttippuram", "Kuznetzovo", "Kyushu", "La Bécasse", "La Charca", "La Colina", "La Criolla", "Laborel", "Lahrauli", "L'Aigle", "Cumulus Hills 04075", "Lakangaon", "Lalitpur", "Lancé", "Lancon", "Långhalsen", "Lanxi", "Lanzenkirchen", "Laochenzhen", "Launton", "Lavrentievka", "Le Pressoir", "Le Teilleul", "Leedey", "Leeuwfontein", "Leighlinbridge", "Leighton", "Leonovka", "Les Ormes", "Lesves", "Lichtenberg", "Lillaverke", "Limerick", "Linum", "Lishui", "Lissa", "Little Piney", "Lixna", "Lodran", "Lohawat", "Lorton", "Los Martinez", "Lost City", "Louisville", "Łowicz", "Lua", "Lucé", "Lumpkin", "Lunan", "Lundsgård", "Luotolax", "Luponnas", "Lusaka", "Mabwe-Khoywa", "Macau", "Machinga", "Macibini", "Madhipura", "Madiun", "Madrid", "Mafra", "Magnesia", "Magombedze", "Mahadevpur", "Maigatari-Danduma", "Malaga", "Malakal", "Malampaka", "Malotas", "Malvern", "Mamra Springs", "Manbhoom", "Manegaon", "Mangwendi", "Manych", "Mardan", "Maria Linden", "Mariaville", "Maribo", "Maridi", "Marilia", "Marion (Iowa)", "Marjalahti", "Marmande", "Maromandia", "Maryville"];
@@ -246,7 +247,7 @@ async function updateSummaryMetrics(meteorites) {
   averageMassElement.textContent = averageMass.toFixed(2);
 }
 
-// This async function initializes the web application
+// This async function initialises the web application
 async function initialise() {
   // Get the HTML element with the ID "results" and store it in the outputElement variable
   const outputElement = document.getElementById("results");
@@ -270,7 +271,8 @@ async function initialise() {
 }
 
 initialise();
-// Get HTML elements with the IDs "met" and "dynamicField"
+
+// Get HTML elements with the IDs "met" (select list) and "dynamicField" (searchbox)
 var selectOption = document.getElementById("met");
 var dynamicField = document.getElementById("dynamicField");
 // Create an input field dynamically and set its attributes
@@ -280,6 +282,7 @@ inputField.id = "input";
 inputField.placeholder = "Enter text";
 dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
 
+// Function to change searchbox type depending on search field:
 selectOption.addEventListener("change", function () {
   // Add an event listener to the "met"
   var selectedValue = selectOption.value;
@@ -331,7 +334,7 @@ selectOption.addEventListener("change", function () {
   }
 });
 
-// This function is responsible for filtering meteorites based on user-provided search parameters.
+// This function is responsible for filtering meteorites based on user-provided search parameters:
 function search(searchParams) {
   const outputElement = document.getElementById("results");
   let meteorites = JSON.parse(outputElement.textContent); // Parse the JSON data of meteorites stored in the output element.
@@ -397,6 +400,7 @@ function search(searchParams) {
   outputElement.textContent = JSON.stringify(meteorites, null, 2); // Display the filtered meteorites in the output element as formatted JSON.
 }
 
+// Functionality of search button:
 const buttonSearch = document.getElementById("searchButton");
 buttonSearch.addEventListener("click", () => {
   var selectedOption = document.getElementById("met").value;
@@ -406,10 +410,11 @@ buttonSearch.addEventListener("click", () => {
   search(searchParams); // Calling search function to filter meteorite data based on the user input.
 });
 
+// Button to get all meteorites back:
 const buttonClear = document.getElementById("clearButton");
 buttonClear.addEventListener("click", initialise);
   
-// Function to initialize the autocomplete functionality
+// Function to initialize the autocomplete functionality:
 function initAutocomplete() {
     const input = document.getElementById("input");
 
@@ -425,12 +430,12 @@ function initAutocomplete() {
     }
 }
 
-// Event listener for input field focus
+// Initialise autocompletion when webpage first loaded:
 document.addEventListener("DOMContentLoaded", function () {
     initAutocomplete();
     });
 
-// Autocomplete class definition
+// Autocomplete class definition for autocompletion functionality:
 class Autocomplete {
 constructor(inputElement, options) {
     this.inputElement = inputElement;
