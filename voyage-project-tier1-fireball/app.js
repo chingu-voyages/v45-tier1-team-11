@@ -246,6 +246,28 @@ async function updateSummaryMetrics(meteorites) {
   averageMassElement.textContent = averageMass.toFixed(2);
 }
 
+async function loadMap() {
+    try {
+      const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
+      const jsonData = await response.json(); // Parse the response data as JSON
+      // Map:
+      var map = L.map('map').setView([20, 0], 2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(map);
+      
+      var marker;
+      jsonData.forEach(function (item) {
+          marker = L.marker([parseFloat(item.reclat), parseFloat(item.reclong)]).addTo(map);
+          marker.bindPopup(`<b>${item.name}</b>`);
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      outputElement.textContent = "Error loading map.";
+    }
+  }
+
 // This async function initializes the web application
 async function initialise() {
   // Get the HTML element with the ID "results" and store it in the outputElement variable
@@ -269,6 +291,7 @@ async function initialise() {
   }
 }
 
+loadMap();
 initialise();
 // Get HTML elements with the IDs "met" and "dynamicField"
 var selectOption = document.getElementById("met");
