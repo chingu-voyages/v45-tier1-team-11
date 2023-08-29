@@ -270,6 +270,7 @@ async function loadMap() {
 
 // This async function initializes the web application
 async function initialise() {
+  loadMap();
   // Get the HTML element with the ID "results" and store it in the outputElement variable
   const outputElement = document.getElementById("results");
 
@@ -291,7 +292,6 @@ async function initialise() {
   }
 }
 
-loadMap();
 initialise();
 // Get HTML elements with the IDs "met" and "dynamicField"
 var selectOption = document.getElementById("met");
