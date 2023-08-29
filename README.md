@@ -26,3 +26,56 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 - Meeting - App Vision & Feature Planning --> ./docs/meeting-vision_and_feature_planning.docx
 - Meeting - Sprint Retrospective, Review, and Planning --> ./docs/meeting-sprint_retrospective_review_and_planning.docx
 - Meeting - Sprint Open Topic Session --> ./docs/meeting-sprint_open_topic_session.docx
+
+
+# Fireball
+
+Welcome to Fireball! This repository contains the code for a web application called Fireball, ---. The application allows users to ---. It also provides various features to ---. Visit it at: ---
+
+## Table of Contents
+
+- [---](#---)
+
+## Features
+
+- ---: ---.
+
+## Installation
+
+Follow these steps to set up the Fireball application locally:
+
+1. Clone the repository:
+
+   ```bash
+   git clone ---
+   ```
+
+2. Install the dependencies:
+
+   ```bash
+   ---
+   ```
+
+3. Run the application:
+
+   ```bash
+   ---
+   ```
+
+5. Open your browser and visit `---` to access Fireball.
+
+## Usage
+
+Fireball provides ---. Here are some common actions users can perform:
+
+- **--**: ---.
+
+## Technologies Used
+
+Fireball utilises the following technologies:
+
+- **--**: ---.
+
+---
+
+Thank you for exploring Fireball! If you have any questions or feedback, please feel free to contact us or raise an issue in the repository.
