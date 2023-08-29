@@ -126,6 +126,14 @@ const recclass = [
     "Winonaite",
   ];
 
+var markers = [];
+function removeAllMarkers() {
+    for (let i = 0; i < markers.length; i++) {
+      markers[i].remove();
+    }
+    markers = [];
+  }
+
 // Create the year and composition histogram charts
 let yearChart = null;
 let compositionChart = null;
@@ -246,21 +254,20 @@ async function updateSummaryMetrics(meteorites) {
   averageMassElement.textContent = averageMass.toFixed(2);
 }
 
-async function loadMap() {
+var map = L.map('map').setView([20, 0], 2);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+async function loadMarkers(jsonData) {
     try {
-      const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
-      const jsonData = await response.json(); // Parse the response data as JSON
-      // Map:
-      var map = L.map('map').setView([20, 0], 2);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(map);
-      
+      removeAllMarkers();
       var marker;
       jsonData.forEach(function (item) {
           marker = L.marker([parseFloat(item.reclat), parseFloat(item.reclong)]).addTo(map);
           marker.bindPopup(`<b>${item.name}</b>`);
+          markers.push(marker);
       });
     } catch (error) {
       console.error("Error:", error);
@@ -270,13 +277,13 @@ async function loadMap() {
 
 // This async function initializes the web application
 async function initialise() {
-  loadMap();
   // Get the HTML element with the ID "results" and store it in the outputElement variable
   const outputElement = document.getElementById("results");
 
   try {
     const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
     const jsonData = await response.json(); // Parse the response data as JSON
+    loadMarkers(jsonData);
 
     let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
     outputElement.textContent = JSON.stringify(meteorites, null, 2);
@@ -417,6 +424,7 @@ function search(searchParams) {
   updateSummaryMetrics(meteorites);
   updateYearHistogram(meteorites);
   updateCompositionHistogram(meteorites);
+  loadMarkers(meteorites);
   outputElement.textContent = JSON.stringify(meteorites, null, 2); // Display the filtered meteorites in the output element as formatted JSON.
 }
 
