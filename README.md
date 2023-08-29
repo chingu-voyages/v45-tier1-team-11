@@ -30,15 +30,18 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 
 # Fireball
 
-Welcome to Fireball! This repository contains the code for a web application called Fireball, ---. The application allows users to ---. It also provides various features to ---. Visit it at: ---
+Welcome to Fireball! This repository contains the code for a web application called Fireball, a platform for users to browse meteorites and discover meteorites. It also provides various features to ---. Visit it at: ---
 
 ## Table of Contents
 
-- [---](#---)
+- [Features](#features)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Technologies Used](#technologies-used)
 
 ## Features
 
-- ---: ---.
+- Search meteorites: search by name, year of landing, composition type and mass.
 
 ## Installation
 
@@ -47,7 +50,7 @@ Follow these steps to set up the Fireball application locally:
 1. Clone the repository:
 
    ```bash
-   git clone ---
+   git clone https://github.com/chingu-voyages/v45-tier1-team-11.git
    ```
 
 2. Install the dependencies:
