@@ -21,20 +21,22 @@
         </select>
         <br /><br />
         <div class="summary-metrics">
-       
-        <div id="dynamicField"></div>
-        <br />
-        <button id="clearButton">Clear</button>
-        <button id="searchButton">Search</button>
-      </section>
-      <div id="filters"></div>
-      <h2>Summary Metrics</h2>
-      <p>Total number of strikes: <span id="totalStrikes">0</span></p>
-      <p>Average mass: <span id="averageMass">0</span></p>
-      <div id="yearHistogram" class="chart"></div>
-      <div id="compositionHistogram" class="chart"></div>
-    </div>
-      <div id="results" style="color: black"></div>
+          <div id="dynamicField"></div>
+          <br />
+          <button id="clearButton">Clear</button>
+          <button id="searchButton">Search</button>
+        </section>
+          <div id="filters"></div>
+          <h2>Summary Metrics</h2>
+          <p>Total number of strikes: <span id="totalStrikes">0</span></p>
+          <p>Average mass: <span id="averageMass">0</span></p>
+          <div id="results" style="color: black"></div>
+          
+          <div><canvas id="yearHistogram" class="chart"></canvas></div>
+          
+          <div><canvas id="compositionHistogram" class="chart"></canvas></div>
+        </div>
+      
     </main>
     <footer>
       <div class="footer-logo">
@@ -45,7 +47,7 @@
         /></a>
       </div>
     </footer>
-    <script src="app.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="app.js"></script>
   </body>
 </html>

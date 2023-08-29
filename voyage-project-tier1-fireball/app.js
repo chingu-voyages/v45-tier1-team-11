@@ -1,4 +1,5 @@
-// To add to the form, meteorite composition:
+// recclass is an array containing all the possible meteorite compositions.
+
 const recclass = [
   "Acapulcoite",
   "Achondrite-ung",
@@ -120,17 +121,143 @@ const recclass = [
   "Winonaite",
 ];
 
-async function initialise() {
-  const outputElement = document.getElementById("results");
-  try {
-    const response = await fetch("utils/meteorites.json");
-    const jsonData = await response.json();
+// Create the year and composition histogram charts
+let yearChart = null;
+let compositionChart = null;
 
-    let meteorites = jsonData;
+//Function to generate a Chart.js histograms
+function createHistogram(data, labels, chartId, chartTitle) {
+  const ctx = document.getElementById(chartId).getContext("2d");
+
+  return new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: chartTitle,
+          data: data,
+          backgroundColor: "rgba(20, 45, 76, 1)",
+          borderColor: "rgba(20, 45, 76, 1)",
+          borderWidth: 1,
+        },
+      ],
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true,
+        },
+      },
+    },
+  });
+}
+//Function to update the Year Histogram
+function updateYearHistogram(meteorites) {
+  // Extract the years from the meteorite data
+  const years = meteorites.map((meteorite) =>
+    new Date(meteorite.year).getFullYear()
+  );
+  // Create an object, to store the amount of meteorites for each year
+  const yearCounts = {};
+  // Loop through the years and count the number of meteorites for each year
+  years.forEach((year) => {
+    if (yearCounts[year]) {
+      yearCounts[year]++; // If the year exists in our object we increment the count
+    } else {
+      yearCounts[year] = 1; // If the year doesn't exist, initialize it with a count of 1
+    }
+  });
+
+  // Sorting the years in the ascending order
+  const sortedYears = Object.keys(yearCounts).sort((a, b) => a - b);
+  // Creating an array of meteorite counts, that corresponds to the sorted years
+  const yearData = sortedYears.map((year) => yearCounts[year]);
+
+  if (yearChart) {
+    yearChart.destroy(); // Destroy the previous chart, if its exists
+  }
+  // Creating a new year histogram chart using the updated data
+  yearChart = createHistogram(
+    yearData,
+    sortedYears,
+    "yearHistogram",
+    "Number of Strikes by Year"
+  );
+}
+
+// Function to update the composition histogram
+function updateCompositionHistogram(meteorites) {
+  // Create an object, to store the amount of meteorites for each composition
+  const compositionCounts = {};
+
+  meteorites.forEach((meteorite) => {
+    const composition = meteorite.recclass;
+    // Loop through the meteorites and count the number of occurrences for each composition
+    if (compositionCounts[composition]) {
+      compositionCounts[composition]++;
+    } else {
+      compositionCounts[composition] = 1;
+    }
+  });
+  // Sorting compositions in an alphabetical order
+  const sortedCompositions = Object.keys(compositionCounts).sort();
+  // Create an array of meteorite counts corresponding to the sorted compositions
+  const compositionData = sortedCompositions.map(
+    (composition) => compositionCounts[composition]
+  );
+
+  if (compositionChart) {
+    compositionChart.destroy(); // Destroy the previous chart, if its exists
+  }
+  // Creating a new composition histogram chart using the updated data
+  compositionChart = createHistogram(
+    compositionData,
+    sortedCompositions,
+    "compositionHistogram",
+    "Number of Strikes by Meteorite Composition"
+  );
+}
+
+// This function calculates and updates summary metrics based on filtered meteorite data.
+async function updateSummaryMetrics(meteorites) {
+  const totalStrikesElement = document.getElementById("totalStrikes");
+  const averageMassElement = document.getElementById("averageMass");
+
+  // Calculating the total number of meteorite strikes.
+  const totalStrikes = meteorites.length;
+  // Calculating the total mass of meteorites, considering valid mass values.
+  const totalMass = meteorites.reduce((sum, meteorite) => {
+    if (meteorite.mass && !isNaN(parseFloat(meteorite.mass))) {
+      return sum + parseFloat(meteorite.mass);
+    }
+    return sum;
+  }, 0);
+
+  // Calculating the average mass of meteorites.
+  const averageMass = totalMass / totalStrikes;
+  // Updating HTML elements with calculated metrics
+  totalStrikesElement.textContent = totalStrikes;
+  averageMassElement.textContent = averageMass.toFixed(2);
+}
+
+// This async function initializes the web application
+async function initialise() {
+  // Get the HTML element with the ID "results" and store it in the outputElement variable
+  const outputElement = document.getElementById("results");
+
+  try {
+    const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
+    const jsonData = await response.json(); // Parse the response data as JSON
+
+    let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
     outputElement.textContent = JSON.stringify(meteorites, null, 2);
-    var filters = document.getElementById("filters");
+    var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
     filters.innerHTML = "";
+    // Call functions to update summary metrics, year histogram, and composition histogram
     updateSummaryMetrics(meteorites);
+    updateYearHistogram(meteorites);
+    updateCompositionHistogram(meteorites);
   } catch (error) {
     console.error("Error:", error);
     outputElement.textContent = "Meteorites not found.";
@@ -138,75 +265,80 @@ async function initialise() {
 }
 
 initialise();
-
+// Get HTML elements with the IDs "met" and "dynamicField"
 var selectOption = document.getElementById("met");
 var dynamicField = document.getElementById("dynamicField");
-
+// Create an input field dynamically and set its attributes
 var inputField = document.createElement("input");
 inputField.type = "text";
 inputField.id = "input";
 inputField.placeholder = "Enter text";
-dynamicField.appendChild(inputField);
+dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
 
 selectOption.addEventListener("change", function () {
+  // Add an event listener to the "met"
   var selectedValue = selectOption.value;
 
   dynamicField.innerHTML = ""; // Clear previous content
 
   if (selectedValue === "mass") {
-    var selectField = document.createElement("select");
+    var selectField = document.createElement("select"); // Create a select field dynamically with options for mass
     selectField.id = "input";
 
     var option1 = document.createElement("option");
     option1.value = "very low";
-    option1.textContent = "very low";
+    option1.textContent = "very low (< 100 g)";
     selectField.appendChild(option1);
 
     var option2 = document.createElement("option");
     option2.value = "low";
-    option2.textContent = "low";
+    option2.textContent = "low (100-1000 g)";
     selectField.appendChild(option2);
 
     var option3 = document.createElement("option");
     option3.value = "medium";
-    option3.textContent = "medium";
+    option3.textContent = "medium (1000-10000 g)";
     selectField.appendChild(option3);
 
     var option4 = document.createElement("option");
     option4.value = "high";
-    option4.textContent = "high";
+    option4.textContent = "high (10000-100000 g)";
     selectField.appendChild(option4);
 
     var option5 = document.createElement("option");
     option5.value = "very high";
-    option5.textContent = "very high";
+    option5.textContent = "very high (> 100000 g)";
     selectField.appendChild(option5);
 
-    dynamicField.appendChild(selectField);
+    dynamicField.appendChild(selectField); // Append the select field to the "dynamicField" element
   } else {
-    var inputField = document.createElement("input");
+    var inputField = document.createElement("input"); // Create a text input field for other options
     inputField.type = "text";
     inputField.id = "input";
     inputField.placeholder = "Enter text";
-    dynamicField.appendChild(inputField);
+    dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
   }
 });
 
+// This function is responsible for filtering meteorites based on user-provided search parameters.
 function search(searchParams) {
   const outputElement = document.getElementById("results");
-  let meteorites = JSON.parse(outputElement.textContent);
+  let meteorites = JSON.parse(outputElement.textContent); // Parse the JSON data of meteorites stored in the output element.
   var filters = document.getElementById("filters");
   var textElement = document.createElement("p");
   Object.keys(searchParams).forEach((parameter) => {
+    // Loop through each search parameter provided by the user.
     const value = searchParams[parameter];
-    textElement.textContent = `${parameter}: ${value}`;
-    filters.appendChild(textElement);
+    textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
+    filters.appendChild(textElement); // Append the filter criteria to the filters element.
+    // Check the search parameter and apply the corresponding filter.
     if (parameter == "year") {
       meteorites = meteorites.filter((meteorite) =>
         meteorite[parameter]
           ? meteorite[parameter].substring(0, 4) === value
           : false
       );
+      // Apply mass range filters based on user-provided values.
     } else if (parameter == "mass") {
       if (value === "very low") {
         meteorites = meteorites.filter((meteorite) =>
@@ -240,31 +372,18 @@ function search(searchParams) {
             : false
         );
       }
+      // Apply filters for other search parameters.
     } else {
       meteorites = meteorites.filter((meteorite) =>
         meteorite[parameter] ? meteorite[parameter] === value : false
       );
     }
   });
+  //Updating Metrict and Histograms
   updateSummaryMetrics(meteorites);
-  outputElement.textContent = JSON.stringify(meteorites, null, 2);
-}
-
-async function updateSummaryMetrics(meteorites) {
-  const totalStrikesElement = document.getElementById("totalStrikes");
-  const averageMassElement = document.getElementById("averageMass");
-
-  const totalStrikes = meteorites.length;
-  const totalMass = meteorites.reduce((sum, meteorite) => {
-    if (meteorite.mass && !isNaN(parseFloat(meteorite.mass))) {
-      return sum + parseFloat(meteorite.mass);
-    }
-    return sum;
-  }, 0);
-  const averageMass = totalMass / totalStrikes;
-
-  totalStrikesElement.textContent = totalStrikes;
-  averageMassElement.textContent = averageMass.toFixed(2);
+  updateYearHistogram(meteorites);
+  updateCompositionHistogram(meteorites);
+  outputElement.textContent = JSON.stringify(meteorites, null, 2); // Display the filtered meteorites in the output element as formatted JSON.
 }
 
 const buttonSearch = document.getElementById("searchButton");
@@ -273,7 +392,7 @@ buttonSearch.addEventListener("click", () => {
   var input = document.getElementById("input").value;
   const searchParams = {};
   searchParams[selectedOption] = input;
-  search(searchParams);
+  search(searchParams); // Calling search function to filter meteorite data based on the user input.
 });
 
 const buttonClear = document.getElementById("clearButton");
