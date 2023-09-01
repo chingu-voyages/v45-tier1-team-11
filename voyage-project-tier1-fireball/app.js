@@ -1425,6 +1425,9 @@ function search(searchParams, input) {
   var filters = document.getElementById("filters");
   var textElement = document.createElement("p");
   Object.keys(searchParams).forEach((parameter) => {
+    if (filters.textContent.includes(parameter)) {
+        return;
+    }
     // Loop through each search parameter provided by the user.
     const value = searchParams[parameter];
     textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
