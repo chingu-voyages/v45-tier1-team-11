@@ -1132,6 +1132,15 @@ const recclass = [
   "Ureilite-an",
   "Winonaite",
 ];
+
+var markers = [];
+function removeAllMarkers() {
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].remove();
+  }
+  markers = [];
+}
+
 //Function to populate table with meteorite data
 function populateTable(data) {
   const tableBody = document.querySelector(".results tbody");
@@ -1289,6 +1298,31 @@ async function updateSummaryMetrics(meteorites) {
   averageMassElement.textContent = averageMass.toFixed(2);
 }
 
+var map = L.map("map").setView([20, 0], 2);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+}).addTo(map);
+
+async function loadMarkers(jsonData) {
+  try {
+    removeAllMarkers();
+    var marker;
+    jsonData.forEach(function (item) {
+      marker = L.marker([
+        parseFloat(item.reclat),
+        parseFloat(item.reclong),
+      ]).addTo(map);
+      marker.bindPopup(`<b>${item.name}</b>`);
+      markers.push(marker);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    outputElement.textContent = "Error loading map.";
+  }
+}
+
 // This async function initialises the web application
 async function initialise() {
   // Get the HTML element with the ID "results" and store it in the outputElement variable
@@ -1297,11 +1331,14 @@ async function initialise() {
   try {
     const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
     const jsonData = await response.json(); // Parse the response data as JSON
+    loadMarkers(jsonData);
 
     let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
+
     outputElement.textContent = JSON.stringify(meteorites, null, 2);
 
     populateTable(meteorites);
+
     var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
     filters.innerHTML = "";
     // Call functions to update summary metrics, year histogram, and composition histogram
@@ -1443,6 +1480,7 @@ function search(searchParams) {
   updateSummaryMetrics(meteorites);
   updateYearHistogram(meteorites);
   updateCompositionHistogram(meteorites);
+  loadMarkers(meteorites);
   outputElement.textContent = JSON.stringify(meteorites, null, 2);
   populateTable(meteorites);
 }

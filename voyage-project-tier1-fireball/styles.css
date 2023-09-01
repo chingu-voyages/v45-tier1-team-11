@@ -64,7 +64,6 @@ html {
   padding: 0;
 }
 
-/* To style autocompletion: */
 #input {
   position: relative;
 }
@@ -78,4 +77,8 @@ html {
   overflow-y: auto;
   left: 50%;
   transform: translateX(-50%);
+}
+
+.autocomplete-result:hover {
+  background-color: #ccc;
 }
