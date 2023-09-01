@@ -1416,7 +1416,10 @@ selectOption.addEventListener("change", function () {
 });
 
 // This function is responsible for filtering meteorites based on user-provided search parameters:
-function search(searchParams) {
+function search(searchParams, input) {
+  if (input === "") {
+    return;
+  }
   const outputElement = document.getElementById("results");
   let meteorites = JSON.parse(outputElement.textContent); // Parse the JSON data of meteorites stored in the output element.
   var filters = document.getElementById("filters");
@@ -1492,7 +1495,7 @@ buttonSearch.addEventListener("click", () => {
   var input = document.getElementById("input").value;
   const searchParams = {};
   searchParams[selectedOption] = input;
-  search(searchParams); // Calling search function to filter meteorite data based on the user input.
+  search(searchParams, input); // Calling search function to filter meteorite data based on the user input.
 });
 
 // Button to get all meteorites back:
