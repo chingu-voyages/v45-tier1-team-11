@@ -11,32 +11,71 @@ header {
   padding: 10px;
 }
 
-
 main {
-    min-height: 70%;
+  min-height: 70%;
 }
-  
+
 footer {
-    height: 40px;
-    width: 100%;
-    flex-shrink: 0;
-    text-align: center;
-    padding: 10px 0;
+  height: 40px;
+  width: 100%;
+  flex-shrink: 0;
+  text-align: center;
+  padding: 10px 0;
 
-    margin: 0;
-    padding: 0;
-    background-color: white;
-    text-align: center;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  text-align: center;
+}
+
+/* Default styles for the table */
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  width: 100%; /* Set the table width to 100% by default */
+  margin-left: 10px;
+}
+
+th {
+  border: 1px solid #ddd;
+  background-color: #f2f2f2;
+  padding: 8px;
+  text-align: left;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Media query for smaller screens (e.g., phones) */
+@media (max-width: 768px) {
+  table {
+    width: 90%; /* Reduce the table width for smaller screens */
   }
+}
+/* To style footer: */
+body,
+html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
-  
-  /* To style footer: */
-  body, html {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-  }
+/* To style autocompletion: */
+#input {
+  position: relative;
+}
 
-    
-
-  
+.autocomplete-results {
+  position: absolute;
+  z-index: 1;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  max-height: 150px;
+  overflow-y: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
