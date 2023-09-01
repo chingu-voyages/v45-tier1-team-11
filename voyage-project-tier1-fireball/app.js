@@ -129,12 +129,49 @@ const recclass = [
 
 var markers = [];
 function removeAllMarkers() {
-    for (let i = 0; i < markers.length; i++) {
-      markers[i].remove();
-    }
-    markers = [];
+  for (let i = 0; i < markers.length; i++) {
+    markers[i].remove();
   }
+  markers = [];
+}
 
+//Function to populate table with meteorite data
+function populateTable(data) {
+  const tableBody = document.querySelector(".results tbody");
+  tableBody.innerHTML = ""; // Clear the existing table data
+
+  data.forEach((meteorite) => {
+    const row = document.createElement("tr");
+
+    const nameCell = document.createElement("td");
+    nameCell.textContent = meteorite.name;
+    row.appendChild(nameCell);
+
+    const compositionCell = document.createElement("td");
+    compositionCell.textContent = meteorite.recclass;
+    row.appendChild(compositionCell);
+
+    const yearCell = document.createElement("td");
+    yearCell.textContent = new Date(meteorite.year).getFullYear();
+    row.appendChild(yearCell);
+
+    const massCell = document.createElement("td");
+
+    // Check if meteorite.mass is a valid number
+    if (!isNaN(parseFloat(meteorite.mass))) {
+      // Round to 2 decimal places if it has numbers (except 0) after the dot
+      const massValue = parseFloat(meteorite.mass).toFixed(2);
+      massCell.textContent = massValue;
+    } else {
+      // Set a dash "-" for NaN values
+      massCell.textContent = "-";
+    }
+
+    row.appendChild(massCell);
+
+    tableBody.appendChild(row);
+  });
+}
 // Create the year and composition histogram charts
 let yearChart = null;
 let compositionChart = null;
@@ -255,28 +292,32 @@ async function updateSummaryMetrics(meteorites) {
   averageMassElement.textContent = averageMass.toFixed(2);
 }
 
-var map = L.map('map').setView([20, 0], 2);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+var map = L.map("map").setView([20, 0], 2);
+L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 19,
+  attribution:
+    '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 }).addTo(map);
 
 async function loadMarkers(jsonData) {
-    try {
-      removeAllMarkers();
-      var marker;
-      jsonData.forEach(function (item) {
-          marker = L.marker([parseFloat(item.reclat), parseFloat(item.reclong)]).addTo(map);
-          marker.bindPopup(`<b>${item.name}</b>`);
-          markers.push(marker);
-      });
-    } catch (error) {
-      console.error("Error:", error);
-      outputElement.textContent = "Error loading map.";
-    }
+  try {
+    removeAllMarkers();
+    var marker;
+    jsonData.forEach(function (item) {
+      marker = L.marker([
+        parseFloat(item.reclat),
+        parseFloat(item.reclong),
+      ]).addTo(map);
+      marker.bindPopup(`<b>${item.name}</b>`);
+      markers.push(marker);
+    });
+  } catch (error) {
+    console.error("Error:", error);
+    outputElement.textContent = "Error loading map.";
   }
+}
 
-// This async function initializes the web application
+// This async function initialises the web application
 async function initialise() {
   // Get the HTML element with the ID "results" and store it in the outputElement variable
   const outputElement = document.getElementById("results");
@@ -287,7 +328,11 @@ async function initialise() {
     loadMarkers(jsonData);
 
     let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
+
     outputElement.textContent = JSON.stringify(meteorites, null, 2);
+
+    populateTable(meteorites);
+
     var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
     filters.innerHTML = "";
     // Call functions to update summary metrics, year histogram, and composition histogram
@@ -365,12 +410,18 @@ selectOption.addEventListener("change", function () {
 });
 
 // This function is responsible for filtering meteorites based on user-provided search parameters:
-function search(searchParams) {
+function search(searchParams, input) {
+  if (input === "") {
+    return;
+  }
   const outputElement = document.getElementById("results");
   let meteorites = JSON.parse(outputElement.textContent); // Parse the JSON data of meteorites stored in the output element.
   var filters = document.getElementById("filters");
   var textElement = document.createElement("p");
   Object.keys(searchParams).forEach((parameter) => {
+    if (filters.textContent.includes(parameter)) {
+        return;
+    }
     // Loop through each search parameter provided by the user.
     const value = searchParams[parameter];
     textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
@@ -419,7 +470,9 @@ function search(searchParams) {
       // Apply filters for other search parameters.
     } else {
       meteorites = meteorites.filter((meteorite) =>
-        meteorite[parameter] ? meteorite[parameter].toLowerCase() === value.toLowerCase() : false
+        meteorite[parameter]
+          ? meteorite[parameter].toLowerCase() === value.toLowerCase()
+          : false
       );
     }
   });
@@ -428,7 +481,8 @@ function search(searchParams) {
   updateYearHistogram(meteorites);
   updateCompositionHistogram(meteorites);
   loadMarkers(meteorites);
-  outputElement.textContent = JSON.stringify(meteorites, null, 2); // Display the filtered meteorites in the output element as formatted JSON.
+  outputElement.textContent = JSON.stringify(meteorites, null, 2);
+  populateTable(meteorites);
 }
 
 // Functionality of search button:
@@ -438,37 +492,42 @@ buttonSearch.addEventListener("click", () => {
   var input = document.getElementById("input").value;
   const searchParams = {};
   searchParams[selectedOption] = input;
-  search(searchParams); // Calling search function to filter meteorite data based on the user input.
+  search(searchParams, input); // Calling search function to filter meteorite data based on the user input.
 });
 
 // Button to get all meteorites back:
 const buttonClear = document.getElementById("clearButton");
 buttonClear.addEventListener("click", initialise);
-  
+
 // Function to initialize the autocomplete functionality:
 function initAutocomplete() {
-    const input = document.getElementById("input");
+  const input = document.getElementById("input");
 
-    if (document.getElementById("met").value == "name") {
-        // Initialize an autocomplete instance
-        new Autocomplete(input, {
-            data: names1.concat(names2).concat(names3).concat(names4).concat(names5).concat(names6),
-        });
-        } else if (document.getElementById("met").value == "recclass") {
-        new Autocomplete(input, {
-            data: recclass,
-        });
-    }
+  if (document.getElementById("met").value == "name") {
+    // Initialize an autocomplete instance
+    new Autocomplete(input, {
+      data: names1
+        .concat(names2)
+        .concat(names3)
+        .concat(names4)
+        .concat(names5)
+        .concat(names6),
+    });
+  } else if (document.getElementById("met").value == "recclass") {
+    new Autocomplete(input, {
+      data: recclass,
+    });
+  }
 }
 
 // Initialise autocompletion when webpage first loaded:
 document.addEventListener("DOMContentLoaded", function () {
-    initAutocomplete();
-    });
+  initAutocomplete();
+});
 
 // Autocomplete class definition for autocompletion functionality:
 class Autocomplete {
-constructor(inputElement, options) {
+  constructor(inputElement, options) {
     this.inputElement = inputElement;
     this.options = options;
     this.isOpen = false;
@@ -478,68 +537,68 @@ constructor(inputElement, options) {
 
     this.setupListeners();
     this.inputElement.parentElement.appendChild(this.resultsContainer);
-}
+  }
 
-setupListeners() {
+  setupListeners() {
     // Input field keyup event listener
     this.inputElement.addEventListener("keyup", (event) => {
-    this.filterResults(event.target.value);
+      this.filterResults(event.target.value);
     });
 
     // Input field blur event listener
     this.inputElement.addEventListener("blur", () => {
-    setTimeout(() => {
+      setTimeout(() => {
         this.closeResults();
-    }, 200); // Delay to allow clicking on a result
+      }, 200); // Delay to allow clicking on a result
     });
 
     // Input field focus event listener
     this.inputElement.addEventListener("focus", () => {
-    if (this.inputElement.value.length > 0) {
+      if (this.inputElement.value.length > 0) {
         this.openResults();
-    }
+      }
     });
-}
+  }
 
-filterResults(query) {
+  filterResults(query) {
     const filteredResults = this.options.data.filter((name) =>
-    name.toLowerCase().includes(query.toLowerCase())
+      name.toLowerCase().includes(query.toLowerCase())
     );
 
     this.displayResults(filteredResults);
-}
+  }
 
-displayResults(results) {
+  displayResults(results) {
     if (results.length === 0) {
-    this.closeResults();
-    return;
+      this.closeResults();
+      return;
     }
 
     this.resultsContainer.innerHTML = "";
 
     results.forEach((result) => {
-    const resultItem = document.createElement("div");
-    resultItem.className = "autocomplete-result";
-    resultItem.textContent = result;
+      const resultItem = document.createElement("div");
+      resultItem.className = "autocomplete-result";
+      resultItem.textContent = result;
 
-    resultItem.addEventListener("click", () => {
+      resultItem.addEventListener("click", () => {
         this.inputElement.value = result;
         this.closeResults();
-    });
+      });
 
-    this.resultsContainer.appendChild(resultItem);
+      this.resultsContainer.appendChild(resultItem);
     });
 
     this.openResults();
-}
+  }
 
-openResults() {
+  openResults() {
     this.resultsContainer.style.display = "block";
     this.isOpen = true;
-}
+  }
 
-closeResults() {
+  closeResults() {
     this.resultsContainer.style.display = "none";
     this.isOpen = false;
-}
+  }
 }

@@ -32,12 +32,26 @@
           <h2>Summary Metrics</h2>
           <p>Total number of strikes: <span id="totalStrikes">0</span></p>
           <p>Average mass: <span id="averageMass">0</span></p>
-          <div id="results" style="color: black"></div>
-          
+          <table class="results">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Composition</th>
+                <th>Year</th>
+                <th>Mass (g)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Table content here -->
+            </tbody>
+          </table>
+          <div id="results" style="display: none; color: black;"></div>
+         
           <div><canvas id="yearHistogram" class="chart"></canvas></div>
           
           <div><canvas id="compositionHistogram" class="chart"></canvas></div>
         </div>
+      
     </main>
     <footer>
       <div class="footer-logo">
