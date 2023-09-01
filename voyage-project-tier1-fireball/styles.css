@@ -52,3 +52,7 @@ footer {
     left: 50%;
     transform: translateX(-50%);
 }
+
+.autocomplete-result:hover {
+    background-color: #ccc;
+}
