@@ -128,7 +128,7 @@ const recclass = [
   ];
 
 const yellowMarkerIcon = L.icon({
-    iconUrl: 'utils/images/yellow-marker-border.png',
+    iconUrl: 'utils/images/yellow-marker-border-2.png',
     shadowUrl: 'utils/images/marker-shadow.png',
     iconSize: [32, 42],
     iconAnchor: [16, 32],
