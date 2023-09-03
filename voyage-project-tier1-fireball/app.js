@@ -316,7 +316,7 @@ async function loadMarkers(jsonData) {
         parseFloat(item.reclat),
         parseFloat(item.reclong),
       ], { icon: redMarkerIcon }).addTo(map);
-      marker.bindPopup(`<b>${item.name}</b>`);
+      marker.bindPopup(`<b>${item.name}</b><p style="color:black">Coordinates: (${item.reclat}, ${item.reclong})</p>`);
       markers.push(marker);
     });
   } catch (error) {
