@@ -127,10 +127,10 @@ const recclass = [
     "Winonaite",
   ];
 
-const yellowMarkerIcon = L.icon({
-    iconUrl: 'utils/images/yellow-marker-border-2.png',
+const redMarkerIcon = L.icon({
+    iconUrl: 'utils/images/red-marker.png',
     shadowUrl: 'utils/images/marker-shadow.png',
-    iconSize: [32, 42],
+    iconSize: [32, 32],
     iconAnchor: [16, 32],
     popupAnchor: [0, -32]
 });
@@ -304,7 +304,7 @@ var map = L.map("map").setView([20, 0], 2);
 L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution:
-    '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    '© <a href="https://stamen.com">Stamen</a> contributors',
 }).addTo(map);
 
 async function loadMarkers(jsonData) {
@@ -315,7 +315,7 @@ async function loadMarkers(jsonData) {
       marker = L.marker([
         parseFloat(item.reclat),
         parseFloat(item.reclong),
-      ], { icon: yellowMarkerIcon }).addTo(map);
+      ], { icon: redMarkerIcon }).addTo(map);
       marker.bindPopup(`<b>${item.name}</b>`);
       markers.push(marker);
     });
