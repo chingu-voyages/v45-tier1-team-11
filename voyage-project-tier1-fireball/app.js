@@ -336,16 +336,17 @@ async function loadMarkers(jsonData) {
   }  
 
 function findMarkerByName(meteoriteName) {
-    for (let i = 0; i < markers.length; i++) {
-      const marker = markers[i];
-      const popupContent = marker.getPopup().getContent();
-    
-      if (popupContent.includes(meteoriteName)) {
-                marker.openPopup();
+for (let i = 0; i < markers.length; i++) {
+    const marker = markers[i];
+    if (marker && marker.getPopup) {
+    const popupContent = marker.getPopup().getContent();
+    if (popupContent.includes(meteoriteName)) {
+        marker.openPopup();
         break;
-      }
     }
-  }  
+    }
+}
+}
 
 // This async function initialises the web application
 async function initialise() {
