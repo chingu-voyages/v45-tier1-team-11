@@ -178,6 +178,10 @@ function populateTable(data) {
     row.appendChild(massCell);
 
     tableBody.appendChild(row);
+
+    row.addEventListener("click", () => {
+        findMarkerByName(meteorite.name);
+      });
   });
 }
 // Create the year and composition histogram charts
@@ -324,6 +328,18 @@ async function loadMarkers(jsonData) {
     outputElement.textContent = "Error loading map.";
   }
 }
+
+function findMarkerByName(meteoriteName) {
+    for (let i = 0; i < markers.length; i++) {
+      const marker = markers[i];
+      const popupContent = marker.getPopup().getContent();
+
+      if (popupContent.includes(meteoriteName)) {
+        marker.openPopup();
+        break;
+      }
+    }
+  }
 
 // This async function initialises the web application
 async function initialise() {
