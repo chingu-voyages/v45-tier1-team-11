@@ -135,12 +135,15 @@ const redMarkerIcon = L.icon({
     popupAnchor: [0, -32]
 });
 
-var markers = [];
+var markers = new Array(1000);
+
 function removeAllMarkers() {
   for (let i = 0; i < markers.length; i++) {
-    markers[i].remove();
+    if (markers[i]) {
+      markers[i].remove();
+    }
   }
-  markers = [];
+  markers = new Array(1000);
 }
 
 //Function to populate table with meteorite data
@@ -312,34 +315,37 @@ L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/
 }).addTo(map);
 
 async function loadMarkers(jsonData) {
-  try {
-    removeAllMarkers();
-    var marker;
-    jsonData.forEach(function (item) {
-      marker = L.marker([
-        parseFloat(item.reclat),
-        parseFloat(item.reclong),
-      ], { icon: redMarkerIcon }).addTo(map);
-      marker.bindPopup(`<b>${item.name}</b><p style="color:black">Coordinates: (${item.reclat}, ${item.reclong})</p>`);
-      markers.push(marker);
-    });
-  } catch (error) {
-    console.error("Error:", error);
-    outputElement.textContent = "Error loading map.";
-  }
-}
+    try {
+      removeAllMarkers();
+      var marker;
+      jsonData.forEach(function (item) {
+        const latitude = parseFloat(item.reclat);
+        const longitude = parseFloat(item.reclong);
+  
+        if (!isNaN(latitude) && !isNaN(longitude)) {
+          // Check if both latitude and longitude are valid numbers
+          marker = L.marker([latitude, longitude], { icon: redMarkerIcon }).addTo(map);
+          marker.bindPopup(`<b>${item.name}</b><p style="color:black">Coordinates: (${latitude}, ${longitude})</p>`);
+          markers.push(marker);
+        }
+      });
+    } catch (error) {
+      console.error("Error:", error);
+      outputElement.textContent = "Error loading map.";
+    }
+  }  
 
 function findMarkerByName(meteoriteName) {
     for (let i = 0; i < markers.length; i++) {
       const marker = markers[i];
       const popupContent = marker.getPopup().getContent();
-
+    
       if (popupContent.includes(meteoriteName)) {
-        marker.openPopup();
+                marker.openPopup();
         break;
       }
     }
-  }
+  }  
 
 // This async function initialises the web application
 async function initialise() {
