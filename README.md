@@ -30,7 +30,7 @@ Meeting Agenda templates (located in the `/docs` directory in this repo):
 
 # Fireball
 
-Welcome to Fireball! This repository contains the code for a web application called Fireball, a platform for users to browse meteorites and discover meteorites. It also provides various features to ---. Visit it at: ---
+Welcome to Fireball! This repository contains the code for a web application called Fireball, a platform for users to browse and discover meteorites. Visit it at: ---
 
 ## Table of Contents
 
@@ -42,6 +42,8 @@ Welcome to Fireball! This repository contains the code for a web application cal
 ## Features
 
 - Search meteorites: search by name, year of landing, composition type and mass.
+- Statistics: histograms classifying the resulting meteorites by year and composition; number and average mass of resulting meteorites.
+- Map of meteorites: the resulting meteorites are displayed on a world map and when a row in the table of results is clicked on, the corresponding pop up is opened on the map.
 
 ## Installation
 
@@ -53,31 +55,17 @@ Follow these steps to set up the Fireball application locally:
    git clone https://github.com/chingu-voyages/v45-tier1-team-11.git
    ```
 
-2. Install the dependencies:
-
-   ```bash
-   ---
-   ```
-
-3. Run the application:
-
-   ```bash
-   ---
-   ```
-
-5. Open your browser and visit `---` to access Fireball.
+2. Use your usual method to start a server (Python or Node.js HTTP Server, Live Server from VSCode...) and go to the corresponding port.
 
 ## Usage
 
 Fireball provides ---. Here are some common actions users can perform:
 
-- **--**: ---.
+- **Search**: ---.
 
 ## Technologies Used
 
-Fireball utilises the following technologies:
-
-- **--**: ---.
+Fireball is meant to be a front end web application and it is built in HTML, CSS and Vanilla JavaScript.
 
 ---
 
