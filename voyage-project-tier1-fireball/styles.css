@@ -3,6 +3,9 @@ body {
   padding: 0;
   background-color: black;
   text-align: center;
+  overflow-x: hidden;
+  border: solid;
+  width: 100%;
 }
 
 header {
@@ -37,8 +40,7 @@ table {
   margin: 0 auto;
   border-collapse: collapse;
   border: 1px solid #15418c;
-  width: 100%; /* Set the table width to 100% by default */
-  margin-left: 10px;
+  width: 97%;
   color: white;
 }
 
@@ -61,6 +63,7 @@ td {
     width: 90%; /* Reduce the table width for smaller screens */
   }
 }
+
 /* To style footer: */
 body,
 html {
