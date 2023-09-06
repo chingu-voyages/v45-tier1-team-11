@@ -164,11 +164,7 @@ thead {
   background-color: #5b616b;
 }
 
-.display-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 /* Histograms */
 .histogram {
   width: 45%;
