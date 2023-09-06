@@ -8,9 +8,13 @@
       rel="stylesheet"
       href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     />
-    <link rel="stylesheet" href="styles.css" /><link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto+Serif:opsz,wght@8..144,100;8..144,500;8..144,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,300;1,400;1,700&family=Open+Sans:wght@300;400;500;600;700;800&family=Roboto+Serif:opsz,wght@8..144,100;8..144,500;8..144,700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <header>
@@ -20,56 +24,48 @@
       <div id="map" style="width: 100%; height: 500px"></div>
       <div class="strikes-mass">
         <h3>Meteorite Strike Statistics</h3>
-              <p>Total number of strikes: <span id="totalStrikes">0</span></p>
-              <p>Average mass(g): <span id="averageMass">0</span></p>
+        <p>Total number of strikes: <span id="totalStrikes">0</span></p>
+        <p>Average mass(g): <span id="averageMass">0</span></p>
       </div>
-      
+
       <h2 id="meteoriteSearchHeading">Search for a Meteorite</h2>
-    <section class="search" id="search-section">
-      
+      <section class="search" id="search-section">
         <div class="search-components"></div>
-          <select name="meteorite" id="met">
-            <option value="name">Name</option>
-            <option value="year">Year</option>
-            <option value="recclass">Meteorite composition</option>
-            <option value="mass">Mass</option>
-          </select>
+        <select name="meteorite" id="met">
+          <option value="name">Name</option>
+          <option value="year">Year</option>
+          <option value="recclass">Meteorite composition</option>
+          <option value="mass">Mass</option>
+        </select>
 
-            
-            <div id="dynamicField"></div>
-            <button  class="button" id="searchButton">Search</button>
+        <div id="dynamicField"></div>
+        <button class="button" id="searchButton">Search</button>
+        <button class="button" id="clearButton">Clear</button>
+        <div id="filters"></div>
+      </section>
 
-            <button class="button" id="clearButton">Clear</button>
-            
-            <div id="filters"></div>
-            
-          
-  </section>
+      <div class="table-container">
+        <table class="results">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Composition</th>
+              <th>Year</th>
+              <th>Mass (g)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
 
+      <div id="results" style="display: none; color: black"></div>
 
-  <div class="table-container display-container">
-          <table class="results">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Composition</th>
-                <th>Year</th>
-                <th>Mass (g)</th>
-              </tr>
-            </thead>
-            <tbody></tbody>
-          </table>
-  </div>
-
-        <div id="results" style="display: none; color: black"></div>
-
-        <div class="display-container">
-          <div class="histogram" id="yearHistogramContainer">
-            <canvas id="yearHistogram" class="chart"></canvas>
-          </div>
-          <div class="histogram" id="compositionHistogramContainer">
-            <canvas id="compositionHistogram" class="chart"></canvas>
-          </div>
+      <div class="display-container">
+        <div class="histogram" id="yearHistogramContainer">
+          <canvas id="yearHistogram" class="chart"></canvas>
+        </div>
+        <div class="histogram" id="compositionHistogramContainer">
+          <canvas id="compositionHistogram" class="chart"></canvas>
         </div>
       </div>
     </main>

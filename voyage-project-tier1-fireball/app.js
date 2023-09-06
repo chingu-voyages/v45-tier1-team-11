@@ -1395,9 +1395,11 @@ var selectOption = document.getElementById("met");
 var dynamicField = document.getElementById("dynamicField");
 // Create an input field dynamically and set its attributes
 var inputField = document.createElement("input");
+
 inputField.type = "text";
 inputField.id = "input";
 inputField.placeholder = "Enter text";
+
 dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
 
 // Function to change searchbox type depending on search field:
