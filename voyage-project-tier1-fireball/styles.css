@@ -1,92 +1,314 @@
+/* Global styling */
+* {
+  font-family: "Merriweather", serif;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: black;
-  text-align: center;
-  overflow-x: hidden;
-  border: solid;
-  width: 100%;
-}
-
-header {
+  font-size: 1rem;
   color: white;
+}
+
+/* Heading styles */
+h1 {
   text-align: center;
-  padding: 10px;
+  font-family: "Merriweather", serif;
+  font-weight: 700;
+  font-size: 2rem;
 }
 
-h2, p, th {
-    color: white;
+/*Section with Information about strikes and mass*/
+
+.strikes-mass {
+  font-size: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  margin: 10px 20px 0 auto;
+  padding: 0px;
 }
 
-main {
-  min-height: 70%;
+.strikes-mass h3,
+.strikes-mass p {
+  margin: 0;
 }
 
+/* Search section */
+#meteoriteSearchHeading {
+  margin-left: 10%;
+  text-align: left;
+  font-size: 2rem;
+}
+
+#search-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 1.5rem;
+  margin-left: 5%;
+}
+
+#search-section * {
+  font-size: 1rem;
+}
+
+#met {
+  color: white;
+  background-color: #5b616b;
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.summary-metrics {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.summary-metrics > button {
+  margin-right: 5px;
+}
+
+.summary-metrics > button:last-child {
+  margin-right: 0;
+  margin-left: auto;
+}
+
+/* Buttons */
+.button {
+  background-color: #5b616b;
+  font-weight: bold;
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 18px;
+  margin: 20px;
+}
+
+#searchButton {
+  margin-right: 15%;
+}
+
+#clearButton {
+  position: relative;
+  margin-left: 10px;
+}
+
+.button:hover {
+  background-color: #d6d7d9;
+}
+
+/* Table */
+.table-container {
+  max-height: 600px;
+  overflow-y: auto;
+}
+
+table {
+  margin: 0 auto;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+  width: 97%;
+  background-color: white;
+  color: black;
+}
+
+th {
+  border: 1px solid black;
+  background-color: #15418c;
+  text-align: left;
+  color: white;
+  padding: 2px;
+}
+
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* Scrollbar styling to the table container */
+.table-container {
+  max-height: 600px;
+  overflow-y: auto;
+  scrollbar-width: thin; /* For Firefox */
+  scrollbar-color: #5b616b #aeb0b5; /* For Firefox */
+}
+
+/* For Chrome, Edge, and Safari */
+.table-container::-webkit-scrollbar {
+  width: 10px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background-color: #aeb0b5;
+  border-radius: 5px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background-color: #5b616b;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background-color: #5b616b;
+}
+
+.display-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Histograms */
+.histogram {
+  width: 45%;
+  max-height: 600px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+}
+
+/*Footer*/
 footer {
   height: 40px;
   width: 100%;
   flex-shrink: 0;
   text-align: center;
   padding: 10px 0;
-
-  margin: 0;
-  padding: 0;
-  background-color: black;
-  text-align: center;
-}
-
-/* Default styles for the table */
-table {
-  margin: 0 auto;
-  border-collapse: collapse;
-  border: 1px solid #15418c;
-  width: 97%;
-  color: white;
-}
-
-th {
-  border: 1px solid #15418c;
-  background-color: #15418c;
-  padding: 8px;
-  text-align: left;
-}
-
-td {
-  border: 1px solid #15418c;
-  padding: 8px;
-  text-align: left;
-}
-
-/* Media query for smaller screens (e.g., phones) */
-@media (max-width: 768px) {
-  table {
-    width: 90%; /* Reduce the table width for smaller screens */
-  }
-}
-
-/* To style footer: */
-body,
-html {
-  height: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 #input {
+  border: none;
+  padding: 1%;
+  position: relative;
+  background-color: #5b616b;
+  color: white;
+}
+
+#dynamicField {
   position: relative;
 }
 
+/*Autocomplete*/
 .autocomplete-results {
   position: absolute;
-  z-index: 1;
-  background-color: #f1f1f1;
+  top: 100%;
+  left: 0;
+  z-index: 2;
+  background-color: #5b616b;
   border: 1px solid #ccc;
   max-height: 150px;
   overflow-y: auto;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .autocomplete-result:hover {
-  background-color: #ccc;
+  background-color: #aeb0b5;
+}
+
+#filters {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 20px;
+  margin-left: 20px;
+}
+
+#filters > * {
+  margin-right: 10px;
+  font-size: 20px;
+}
+
+#filters > *:last-child {
+  margin-right: 0;
+  font-size: 20px;
+}
+@media (max-width: 768px) {
+  #search-section {
+    flex-direction: column;
+    align-items: center;
+    margin-left: 0;
+  }
+
+  /* Add margin to separate elements on small screens */
+  #dynamicField,
+  #buttons-container,
+  #filters,
+  #input {
+    margin-top: 10px;
+  }
+
+  #met {
+    margin-left: 10px;
+  }
+
+  #meteoriteSearchHeading {
+    margin-left: 0;
+    text-align: center;
+    font-size: 20px;
+  }
+
+  .summary-metrics {
+    margin-right: 0;
+  }
+
+  .button {
+    font-size: 12px;
+    padding: 5px 10px;
+    margin: 5px 2px;
+  }
+
+  #buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  #searchButton {
+    margin: 5% 0 3%;
+  }
+
+  #clearButton {
+    margin-left: 0;
+  }
+
+  #filters {
+    margin-left: 0;
+  }
+
+  .table-container {
+    width: 97%;
+  }
+  .histogram {
+    width: 100%;
+    margin-left: 0;
+  }
+  table {
+    width: 100%;
+    font-size: 14px;
+  }
+  td {
+    padding: 3px;
+  }
+  .histogram {
+    margin-top: 10%;
+    max-height: 500px;
+  }
+
+  .display-container {
+    flex-direction: column;
+  }
 }
