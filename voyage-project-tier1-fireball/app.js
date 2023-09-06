@@ -1001,7 +1001,6 @@ const names = [
     "Tjerebon",
     "Tomakovka"
 ];
-
 const recclass = [
   "Acapulcoite",
   "Achondrite-ung",
@@ -1130,9 +1129,7 @@ const redMarkerIcon = L.icon({
   iconAnchor: [16, 32],
   popupAnchor: [0, -32],
 });
-
 var markers = new Array(1000);
-
 function removeAllMarkers() {
   for (let i = 0; i < markers.length; i++) {
     if (markers[i]) {
@@ -1183,10 +1180,10 @@ function populateTable(data) {
     });
   });
 }
+
 // Create the year and composition histogram charts
 let yearChart = null;
 let compositionChart = null;
-
 //Function to generate a Chart.js histograms
 function createHistogram(data, labels, chartId, chartTitle) {
   const ctx = document.getElementById(chartId).getContext("2d");
@@ -1247,7 +1244,6 @@ function updateYearHistogram(meteorites) {
     "Number of Strikes by Year"
   );
 }
-
 // Function to update the composition histogram
 function updateCompositionHistogram(meteorites) {
   // Create an object, to store the amount of meteorites for each composition
@@ -1280,7 +1276,6 @@ function updateCompositionHistogram(meteorites) {
     "Number of Strikes by Meteorite Composition"
   );
 }
-
 // This function calculates and updates summary metrics based on filtered meteorite data.
 async function updateSummaryMetrics(meteorites) {
   const totalStrikesElement = document.getElementById("totalStrikes");
@@ -1311,7 +1306,6 @@ L.tileLayer(
     attribution: '© <a href="https://stamen.com">Stamen</a> contributors',
   }
 ).addTo(map);
-
 async function loadMarkers(jsonData) {
   try {
     removeAllMarkers();
@@ -1336,7 +1330,6 @@ async function loadMarkers(jsonData) {
     outputElement.textContent = "Error loading map.";
   }
 }
-
 function findMarkerByName(meteoriteName) {
   for (let i = 0; i < markers.length; i++) {
     const marker = markers[i];
@@ -1350,36 +1343,6 @@ function findMarkerByName(meteoriteName) {
   }
 }
 
-// This async function initialises the web application
-async function initialise() {
-  // Get the HTML element with the ID "results" and store it in the outputElement variable
-  const outputElement = document.getElementById("results");
-
-  try {
-    const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
-    const jsonData = await response.json(); // Parse the response data as JSON
-    loadMarkers(jsonData);
-
-    let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
-
-    outputElement.textContent = JSON.stringify(meteorites, null, 2);
-
-    populateTable(meteorites);
-
-    var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
-    filters.innerHTML = "";
-    // Call functions to update summary metrics, year histogram, and composition histogram
-    updateSummaryMetrics(meteorites);
-    updateYearHistogram(meteorites);
-    updateCompositionHistogram(meteorites);
-  } catch (error) {
-    console.error("Error:", error);
-    outputElement.textContent = "Meteorites not found.";
-  }
-}
-
-initialise();
-
 // Get HTML elements with the IDs "met" (select list) and "dynamicField" (searchbox)
 var selectOption = document.getElementById("met");
 var dynamicField = document.getElementById("dynamicField");
@@ -1389,6 +1352,36 @@ inputField.type = "text";
 inputField.id = "input";
 inputField.placeholder = "Enter text";
 dynamicField.appendChild(inputField); // Append the input field to the "dynamicField" element
+
+// This async function initialises the web application
+async function initialise() {
+    // Get the HTML element with the ID "results" and store it in the outputElement variable
+    const outputElement = document.getElementById("results");
+  
+    try {
+      const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
+      const jsonData = await response.json(); // Parse the response data as JSON
+      loadMarkers(jsonData);
+  
+      let meteorites = jsonData; // Store the JSON data in a variable named "meteorites"
+  
+      outputElement.textContent = JSON.stringify(meteorites, null, 2);
+  
+      populateTable(meteorites);
+  
+      var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
+      filters.innerHTML = "";
+      // Call functions to update summary metrics, year histogram, and composition histogram
+      updateSummaryMetrics(meteorites);
+      updateYearHistogram(meteorites);
+      updateCompositionHistogram(meteorites);
+    } catch (error) {
+      console.error("Error:", error);
+      outputElement.textContent = "Meteorites not found.";
+    }
+}
+  
+initialise();
 
 // Function to change searchbox type depending on search field:
 selectOption.addEventListener("change", function () {
@@ -1441,7 +1434,6 @@ selectOption.addEventListener("change", function () {
     initAutocomplete();
   }
 });
-
 // This function is responsible for filtering meteorites based on user-provided search parameters:
 function search(searchParams, input) {
   if (input === "") {
@@ -1517,7 +1509,6 @@ function search(searchParams, input) {
   outputElement.textContent = JSON.stringify(meteorites, null, 2);
   populateTable(meteorites);
 }
-
 // Functionality of search button:
 const buttonSearch = document.getElementById("searchButton");
 buttonSearch.addEventListener("click", () => {
@@ -1527,12 +1518,87 @@ buttonSearch.addEventListener("click", () => {
   searchParams[selectedOption] = input;
   search(searchParams, input); // Calling search function to filter meteorite data based on the user input.
 });
-
 // Button to get all meteorites back:
 const buttonClear = document.getElementById("clearButton");
 buttonClear.addEventListener("click", initialise);
-
-// Function to initialize the autocomplete functionality:
+// Autocomplete class definition for autocompletion functionality:
+class Autocomplete {
+    constructor(inputElement, options) {
+      this.inputElement = inputElement;
+      this.options = options;
+      this.isOpen = false;
+      this.resultsContainer = document.createElement("div");
+      this.resultsContainer.className = "autocomplete-results";
+      this.resultsContainer.style.display = "none";
+  
+      this.setupListeners();
+      this.inputElement.parentElement.appendChild(this.resultsContainer);
+    }
+  
+    setupListeners() {
+      // Input field keyup event listener
+      this.inputElement.addEventListener("keyup", (event) => {
+        this.filterResults(event.target.value);
+      });
+  
+      // Input field blur event listener
+      this.inputElement.addEventListener("blur", () => {
+        setTimeout(() => {
+          this.closeResults();
+        }, 200); // Delay to allow clicking on a result
+      });
+  
+      // Input field focus event listener
+      this.inputElement.addEventListener("focus", () => {
+        if (this.inputElement.value.length > 0) {
+          this.openResults();
+        }
+      });
+    }
+  
+    filterResults(query) {
+      const filteredResults = this.options.data.filter((name) =>
+        name.toLowerCase().includes(query.toLowerCase())
+      );
+  
+      this.displayResults(filteredResults);
+    }
+  
+    displayResults(results) {
+      if (results.length === 0) {
+        this.closeResults();
+        return;
+      }
+  
+      this.resultsContainer.innerHTML = "";
+  
+      results.forEach((result) => {
+        const resultItem = document.createElement("div");
+        resultItem.className = "autocomplete-result";
+        resultItem.textContent = result;
+  
+        resultItem.addEventListener("click", () => {
+          this.inputElement.value = result;
+          this.closeResults();
+        });
+  
+        this.resultsContainer.appendChild(resultItem);
+      });
+  
+      this.openResults();
+    }
+  
+    openResults() {
+      this.resultsContainer.style.display = "block";
+      this.isOpen = true;
+    }
+  
+    closeResults() {
+      this.resultsContainer.style.display = "none";
+      this.isOpen = false;
+    }
+  }
+// Function to initialise the autocomplete functionality:
 function initAutocomplete() {
   const input = document.getElementById("input");
 
@@ -1552,81 +1618,3 @@ function initAutocomplete() {
 document.addEventListener("DOMContentLoaded", function () {
   initAutocomplete();
 });
-
-// Autocomplete class definition for autocompletion functionality:
-class Autocomplete {
-  constructor(inputElement, options) {
-    this.inputElement = inputElement;
-    this.options = options;
-    this.isOpen = false;
-    this.resultsContainer = document.createElement("div");
-    this.resultsContainer.className = "autocomplete-results";
-    this.resultsContainer.style.display = "none";
-
-    this.setupListeners();
-    this.inputElement.parentElement.appendChild(this.resultsContainer);
-  }
-
-  setupListeners() {
-    // Input field keyup event listener
-    this.inputElement.addEventListener("keyup", (event) => {
-      this.filterResults(event.target.value);
-    });
-
-    // Input field blur event listener
-    this.inputElement.addEventListener("blur", () => {
-      setTimeout(() => {
-        this.closeResults();
-      }, 200); // Delay to allow clicking on a result
-    });
-
-    // Input field focus event listener
-    this.inputElement.addEventListener("focus", () => {
-      if (this.inputElement.value.length > 0) {
-        this.openResults();
-      }
-    });
-  }
-
-  filterResults(query) {
-    const filteredResults = this.options.data.filter((name) =>
-      name.toLowerCase().includes(query.toLowerCase())
-    );
-
-    this.displayResults(filteredResults);
-  }
-
-  displayResults(results) {
-    if (results.length === 0) {
-      this.closeResults();
-      return;
-    }
-
-    this.resultsContainer.innerHTML = "";
-
-    results.forEach((result) => {
-      const resultItem = document.createElement("div");
-      resultItem.className = "autocomplete-result";
-      resultItem.textContent = result;
-
-      resultItem.addEventListener("click", () => {
-        this.inputElement.value = result;
-        this.closeResults();
-      });
-
-      this.resultsContainer.appendChild(resultItem);
-    });
-
-    this.openResults();
-  }
-
-  openResults() {
-    this.resultsContainer.style.display = "block";
-    this.isOpen = true;
-  }
-
-  closeResults() {
-    this.resultsContainer.style.display = "none";
-    this.isOpen = false;
-  }
-}
