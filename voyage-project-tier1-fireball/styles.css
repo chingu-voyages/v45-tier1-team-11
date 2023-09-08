@@ -153,9 +153,13 @@
     scrollbar-color: #5b616b #aeb0b5;
     border-radius: 5px;
   }
+
+  .autocomplete-results {
+    width: 100%;
+  }
   
   .table-container {
-      width: 97%;
+    width: 97%;
   }
   
   /* For Chrome, Edge, and Safari */
