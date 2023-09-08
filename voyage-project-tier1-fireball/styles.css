@@ -49,6 +49,7 @@ h1 {
   align-items: center;
   font-size: 1.5rem;
   margin-left: 5%;
+  
 }
 
 #search-section * {
@@ -60,20 +61,25 @@ h1 {
   background-color: #5b616b;
   margin-right: 10px;
   font-size: 1rem;
+  border-radius: 6px;
+  padding: 2px;
 }
 #input {
   border: none;
-  padding: 1%;
+  padding: 4px;
   position: relative;
   background-color: #5b616b;
   color: white;
+  border-radius: 6px;
 }
 
 #dynamicField {
   position: relative;
+  padding: 2px;
 }
-
-
+#dynamicField > input {
+  border-radius: 6px; 
+}
 
 /* Buttons */
 .button {
@@ -101,6 +107,18 @@ h1 {
   background-color: #d6d7d9;
 }
 
+#meteoritesNotFound {
+  display: flex;
+  justify-content: center;
+}
+
+#tableToggle {
+  float: right;
+  padding: 5px 10px;
+  border-radius: 8px;
+  margin: 0px 20px 8px; /* Adjust the margin here to reduce the top margin */
+}
+
 
 /* Scrollbar styling to the table container */
 
@@ -111,7 +129,7 @@ h1 {
   max-height: 600px;
   overflow-y: auto;
   margin: 0 auto;
- 
+  border-radius: 5px;
 }
 
 /* Scrollbar styling */
@@ -125,6 +143,7 @@ h1 {
   margin: 0 auto;
   scrollbar-width: thin;
   scrollbar-color: #5b616b #aeb0b5;
+  border-radius: 5px;
 }
 
 /* For Chrome, Edge, and Safari */
@@ -134,6 +153,7 @@ h1 {
   right: 0;
   top: 0;
   width: 15px;
+  border-radius: 5px;
 }
 
 .table-container::-webkit-scrollbar-thumb,
@@ -145,11 +165,13 @@ h1 {
 .table-container::-webkit-scrollbar-thumb:hover,
 .autocomplete-results::-webkit-scrollbar-thumb:hover {
   background-color: #5b616b;
+  border-radius: 5px;
 }
 
 .table-container::-webkit-scrollbar-track,
 .autocomplete-results::-webkit-scrollbar-track {
   background-color: #5b616b;
+  border-radius: 5px;
 }
 
 
@@ -216,6 +238,7 @@ footer {
   border: 1px solid #ccc;
   max-height: 150px;
   overflow-y: auto;
+  border-radius:6px;
 }
 
 .autocomplete-result:hover {
@@ -228,18 +251,18 @@ footer {
 #filters {
   display: flex;
   flex-wrap: wrap;
-  font-size: 20px;
+
   margin-left: 20px;
 }
 
 #filters > * {
   margin-right: 10px;
-  font-size: 20px;
+  
 }
 
 #filters > *:last-child {
   margin-right: 0;
-  font-size: 20px;
+  
 }
 
 
@@ -264,6 +287,7 @@ footer {
 
   #met {
     margin-left: 10px;
+    padding: 2px;
   }
 
   #meteoriteSearchHeading {
@@ -301,7 +325,7 @@ footer {
     display: flex;
     flex-direction: column;
     margin-left: 0;
-    text-align: center;
+   
     }
     #filters > * {
       margin-bottom: 7px;

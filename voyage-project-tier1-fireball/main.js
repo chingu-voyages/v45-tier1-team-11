@@ -61,15 +61,39 @@ selectOption.addEventListener("change", function () {
     initAutocomplete();
   }
 });
+
+const tableToggle = document.getElementById("tableToggle");
+const table = document.querySelector(".results");
+
+// Add a click event listener to the button
+tableToggle.addEventListener("click", () => {
+  if (table.style.display === "none" || table.style.display === "") {
+    table.style.display = "table"; // Show the table
+  } else {
+    table.style.display = "none"; // Hide the table
+  }
+});
 // Functionality of search button:
 const buttonSearch = document.getElementById("searchButton");
-buttonSearch.addEventListener("click", () => {
+
+function performSearch() {
   var selectedOption = document.getElementById("met").value;
   var input = document.getElementById("input").value;
   const searchParams = {};
   searchParams[selectedOption] = input;
   search(searchParams, input); // Calling search function to filter meteorite data based on the user input.
+}
+
+
+buttonSearch.addEventListener("click", performSearch);
+
+// If Enter key is pressed, perform the search
+document.addEventListener("keyup", (event) => {
+  if (event.key === "Enter") {
+    performSearch();
+  }
 });
+
 // Button to get all meteorites back:
 const buttonClear = document.getElementById("clearButton");
 buttonClear.addEventListener("click", initialise);

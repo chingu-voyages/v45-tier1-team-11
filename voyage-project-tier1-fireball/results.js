@@ -1,3 +1,5 @@
+
+
 //Function to populate table with meteorite data
 function populateTable(data) {
     const tableBody = document.querySelector(".results tbody");
@@ -15,8 +17,14 @@ function populateTable(data) {
       row.appendChild(compositionCell);
   
       const yearCell = document.createElement("td");
+       // Check if meteorite.year is a valid date
+        if (isNaN(Date.parse(meteorite.year))) {
+      yearCell.textContent = "-";    //Set dash "-" for NaN values
+      } else {
       yearCell.textContent = new Date(meteorite.year).getFullYear();
-      row.appendChild(yearCell);
+    }
+
+    row.appendChild(yearCell);
   
       const massCell = document.createElement("td");
   
@@ -57,10 +65,10 @@ async function initialise() {
   
       var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
       filters.innerHTML = "";
-      // Call functions to update summary metrics, year histogram, and composition histogram
-      updateSummaryMetrics(meteorites);
-      updateYearHistogram(meteorites);
-      updateCompositionHistogram(meteorites);
+      const meteoritesNotFound = document.getElementById("meteoritesNotFound");
+      meteoritesNotFound.textContent = "";
+ //Call function to update summary metrics and histograms
+ updateMetricsAndHistograms(meteorites);
     } catch (error) {
       console.error("Error:", error);
       outputElement.textContent = "Meteorites not found.";
@@ -133,10 +141,20 @@ function search(searchParams, input) {
         );
       }
     });
-    //Updating Metrict and Histograms
-    updateSummaryMetrics(meteorites);
-    updateYearHistogram(meteorites);
-    updateCompositionHistogram(meteorites);
+  if (meteorites.length === 0) {
+      const meteoritesNotFound = document.getElementById("meteoritesNotFound");
+      if (meteoritesNotFound) {
+        meteoritesNotFound.textContent = "Meteorites not found";
+      }
+    } else {
+     
+      const meteoritesNotFound = document.getElementById("meteoritesNotFound");
+      if (meteoritesNotFound) {
+        meteoritesNotFound.textContent = ""; 
+      }
+    }
+   //Call function to update summary metrics and histograms
+   updateMetricsAndHistograms(meteorites);
     loadMarkers(meteorites);
     outputElement.textContent = JSON.stringify(meteorites, null, 2);
     populateTable(meteorites);

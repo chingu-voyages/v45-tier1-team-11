@@ -1,3 +1,10 @@
+//Function to update Summary Metrics and Histograms
+function updateMetricsAndHistograms(meteorites) {
+  updateSummaryMetrics(meteorites);
+  updateYearHistogram(meteorites);
+  updateCompositionHistogram(meteorites);
+}
+
 // Create the year and composition histogram charts
 let yearChart = null;
 let compositionChart = null;
@@ -109,7 +116,7 @@ async function updateSummaryMetrics(meteorites) {
   }, 0);
 
   // Calculating the average mass of meteorites.
-  const averageMass = totalMass / totalStrikes;
+  const averageMass = totalStrikes > 0 ? totalMass / totalStrikes : 0;
   // Updating HTML elements with calculated metrics
   totalStrikesElement.textContent = totalStrikes;
   averageMassElement.textContent = averageMass.toFixed(2);
