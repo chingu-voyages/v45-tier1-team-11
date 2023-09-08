@@ -2,7 +2,8 @@ var map = L.map("map").setView([20, 0], 2);
 L.tileLayer(
   "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png",
   {
-    maxZoom: 19,
+    maxZoom: 7,
+    minZoom: 2,
     attribution: '© <a href="https://stamen.com">Stamen</a> contributors',
   }
 ).addTo(map);
