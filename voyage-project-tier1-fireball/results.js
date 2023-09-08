@@ -144,7 +144,7 @@ function search(searchParams, input) {
   if (meteorites.length === 0) {
       const meteoritesNotFound = document.getElementById("meteoritesNotFound");
       if (meteoritesNotFound) {
-        meteoritesNotFound.textContent = "Meteorites not found";
+        meteoritesNotFound.textContent = "Meteorites not found.";
       }
     } else {
      
