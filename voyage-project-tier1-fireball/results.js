@@ -1,9 +1,16 @@
-
-
 //Function to populate table with meteorite data
 function populateTable(data) {
     const tableBody = document.querySelector(".results tbody");
     tableBody.innerHTML = ""; // Clear the existing table data
+    const cursorText = document.querySelector("#cursorText");
+
+    tableBody.addEventListener('mouseenter', () => {
+        cursorText.style.display = 'block';
+    });
+    
+    tableBody.addEventListener('mouseleave', () => {
+        cursorText.style.display = 'none';
+    });
   
     data.forEach((meteorite) => {
       const row = document.createElement("tr");
