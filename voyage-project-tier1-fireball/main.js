@@ -79,9 +79,7 @@ const buttonSearch = document.getElementById("searchButton");
 function performSearch() {
   var selectedOption = document.getElementById("met").value;
   var input = document.getElementById("input").value;
-  const searchParams = {};
-  searchParams[selectedOption] = input;
-  search(searchParams, input); // Calling search function to filter meteorite data based on the user input.
+  search(selectedOption, input); // Calling search function to filter meteorite data based on the user input.
 }
 
 

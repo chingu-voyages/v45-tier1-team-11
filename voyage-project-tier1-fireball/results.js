@@ -77,11 +77,11 @@ async function initialise() {
     }
 }
 // This function is responsible for filtering meteorites based on user-provided search parameters:
-function search(searchParams, input) {
+function search(parameter, value) {
     emptyInputMessage.style.display = "none";
     prevInputMessage.style.display = "none";
     numInputMessage.style.display = "none";
-    if (input.trim() === "") {
+    if (value.trim() === "") {
       emptyInputMessage.style.display = "block";
       return;
     }
@@ -89,69 +89,65 @@ function search(searchParams, input) {
     let meteorites = JSON.parse(outputElement.textContent); // Parse the JSON data of meteorites stored in the output element.
     var filters = document.getElementById("filters");
     var textElement = document.createElement("p");
-    Object.keys(searchParams).forEach((parameter) => {
-      if (filters.textContent.includes(parameter)) {
-        prevInputMessage.style.display = "block";
+    if (filters.textContent.includes(parameter)) {
+    prevInputMessage.style.display = "block";
+    return;
+    }
+    // Check the search parameter and apply the corresponding filter.
+    if (parameter == "year") {
+    if (isNaN(parseInt(value))) {
+        numInputMessage.style.display = "block";
         return;
-      }
-      // Loop through each search parameter provided by the user.
-      const value = searchParams[parameter];
-      // Check the search parameter and apply the corresponding filter.
-      if (parameter == "year") {
-        if (isNaN(parseInt(value))) {
-            numInputMessage.style.display = "block";
-            return;
-          }
-        meteorites = meteorites.filter((meteorite) =>
-          meteorite[parameter]
-            ? meteorite[parameter].substring(0, 4) === value
-            : false
-        );
-        // Apply mass range filters based on user-provided values.
-      } else if (parameter == "mass") {
-        if (value === "very low") {
-          meteorites = meteorites.filter((meteorite) =>
-            meteorite[parameter] ? parseInt(meteorite[parameter]) < 100 : false
-          );
-        } else if (value === "low") {
-          meteorites = meteorites.filter((meteorite) =>
-            meteorite[parameter]
-              ? parseInt(meteorite[parameter]) >= 100 &&
-                parseInt(meteorite[parameter]) < 1000
-              : false
-          );
-        } else if (value === "medium") {
-          meteorites = meteorites.filter((meteorite) =>
-            meteorite[parameter]
-              ? parseInt(meteorite[parameter]) >= 1000 &&
-                parseInt(meteorite[parameter]) < 10000
-              : false
-          );
-        } else if (value === "high") {
-          meteorites = meteorites.filter((meteorite) =>
-            meteorite[parameter]
-              ? parseInt(meteorite[parameter]) >= 10000 &&
-                parseInt(meteorite[parameter]) < 100000
-              : false
-          );
-        } else if (value === "very high") {
-          meteorites = meteorites.filter((meteorite) =>
-            meteorite[parameter]
-              ? parseInt(meteorite[parameter]) >= 100000
-              : false
-          );
         }
-        // Apply filters for other search parameters.
-      } else {
+    meteorites = meteorites.filter((meteorite) =>
+        meteorite[parameter]
+        ? meteorite[parameter].substring(0, 4) === value
+        : false
+    );
+    // Apply mass range filters based on user-provided values.
+    } else if (parameter == "mass") {
+    if (value === "very low") {
         meteorites = meteorites.filter((meteorite) =>
-          meteorite[parameter]
-            ? meteorite[parameter].toLowerCase() === value.toLowerCase()
+        meteorite[parameter] ? parseInt(meteorite[parameter]) < 100 : false
+        );
+    } else if (value === "low") {
+        meteorites = meteorites.filter((meteorite) =>
+        meteorite[parameter]
+            ? parseInt(meteorite[parameter]) >= 100 &&
+            parseInt(meteorite[parameter]) < 1000
             : false
         );
-      }
-      textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
-      filters.appendChild(textElement); // Append the filter criteria to the filters element.
-    });
+    } else if (value === "medium") {
+        meteorites = meteorites.filter((meteorite) =>
+        meteorite[parameter]
+            ? parseInt(meteorite[parameter]) >= 1000 &&
+            parseInt(meteorite[parameter]) < 10000
+            : false
+        );
+    } else if (value === "high") {
+        meteorites = meteorites.filter((meteorite) =>
+        meteorite[parameter]
+            ? parseInt(meteorite[parameter]) >= 10000 &&
+            parseInt(meteorite[parameter]) < 100000
+            : false
+        );
+    } else if (value === "very high") {
+        meteorites = meteorites.filter((meteorite) =>
+        meteorite[parameter]
+            ? parseInt(meteorite[parameter]) >= 100000
+            : false
+        );
+    }
+    // Apply filters for other search parameters.
+    } else {
+    meteorites = meteorites.filter((meteorite) =>
+        meteorite[parameter]
+        ? meteorite[parameter].toLowerCase() === value.toLowerCase()
+        : false
+    );
+    }
+    textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
+    filters.appendChild(textElement); // Append the filter criteria to the filters element.
   if (meteorites.length === 0) {
       const meteoritesNotFound = document.getElementById("meteoritesNotFound");
       if (meteoritesNotFound) {
