@@ -51,7 +51,6 @@ function populateTable(data) {
 async function initialise() {
     // Get the HTML element with the ID "results" and store it in the outputElement variable
     const outputElement = document.getElementById("results");
-  
     try {
       const response = await fetch("utils/meteorites.json"); // Send a GET request to fetch data from "utils/meteorites.json"
       const jsonData = await response.json(); // Parse the response data as JSON
@@ -64,6 +63,9 @@ async function initialise() {
       populateTable(meteorites);
   
       var filters = document.getElementById("filters"); // Get the HTML element with the ID "filters" and clear its content
+      emptyInputMessage.style.display = "none";
+      prevInputMessage.style.display = "none";
+      numInputMessage.style.display = "none";
       filters.innerHTML = "";
       const meteoritesNotFound = document.getElementById("meteoritesNotFound");
       meteoritesNotFound.textContent = "";
@@ -76,7 +78,11 @@ async function initialise() {
 }
 // This function is responsible for filtering meteorites based on user-provided search parameters:
 function search(searchParams, input) {
-    if (input === "") {
+    emptyInputMessage.style.display = "none";
+    prevInputMessage.style.display = "none";
+    numInputMessage.style.display = "none";
+    if (input.trim() === "") {
+      emptyInputMessage.style.display = "block";
       return;
     }
     const outputElement = document.getElementById("results");
@@ -85,6 +91,7 @@ function search(searchParams, input) {
     var textElement = document.createElement("p");
     Object.keys(searchParams).forEach((parameter) => {
       if (filters.textContent.includes(parameter)) {
+        prevInputMessage.style.display = "block";
         return;
       }
       // Loop through each search parameter provided by the user.
@@ -92,6 +99,7 @@ function search(searchParams, input) {
       // Check the search parameter and apply the corresponding filter.
       if (parameter == "year") {
         if (isNaN(parseInt(value))) {
+            numInputMessage.style.display = "block";
             return;
           }
         meteorites = meteorites.filter((meteorite) =>

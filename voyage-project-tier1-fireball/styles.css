@@ -80,6 +80,15 @@
   #dynamicField > input {
     border-radius: 6px; 
   }
+
+  .error-message {
+    display: none;
+    color: white;
+  } 
+
+  #error-section {
+    margin-left: 5%;
+  }
   
   /* Buttons */
   .button {
