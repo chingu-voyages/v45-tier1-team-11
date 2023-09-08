@@ -89,10 +89,11 @@ function search(searchParams, input) {
       }
       // Loop through each search parameter provided by the user.
       const value = searchParams[parameter];
-      textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
-      filters.appendChild(textElement); // Append the filter criteria to the filters element.
       // Check the search parameter and apply the corresponding filter.
       if (parameter == "year") {
+        if (isNaN(parseInt(value))) {
+            return;
+          }
         meteorites = meteorites.filter((meteorite) =>
           meteorite[parameter]
             ? meteorite[parameter].substring(0, 4) === value
@@ -140,6 +141,8 @@ function search(searchParams, input) {
             : false
         );
       }
+      textElement.textContent = `${parameter}: ${value}`; // Create a text element to display the filter criteria.
+      filters.appendChild(textElement); // Append the filter criteria to the filters element.
     });
   if (meteorites.length === 0) {
       const meteoritesNotFound = document.getElementById("meteoritesNotFound");
