@@ -41,9 +41,9 @@ Welcome to Fireball! This repository contains the code for a web application cal
 
 ## Features
 
-- Search meteorites: search by name, year of landing, composition type and mass.
-- Statistics: histograms classifying the resulting meteorites by year and composition; number and average mass of resulting meteorites.
-- Map of meteorites: the resulting meteorites are displayed on a world map and when a row in the table of results is clicked on, the corresponding pop up is opened on the map.
+- Search meteorites: Search and filter by name, year of landing, composition type and mass.
+- Statistics: Histograms classifying the resulting meteorites by year and composition; number and average mass of resulting meteorites.
+- Map of meteorites: The resulting meteorites are displayed on a world map and when a row in the table of results is clicked on, the corresponding pop up is opened on the map.
 
 ## Installation
 
@@ -59,9 +59,12 @@ Follow these steps to set up the Fireball application locally:
 
 ## Usage
 
-Fireball provides ---. Here are some common actions users can perform:
+Fireball provides functionality to analyse data of meteorites. Here are some common actions users can perform:
 
-- **Search**: ---.
+- **Filter**: Select a parameter to filter the meteorites by, consecutive filters can be applied. All filters can be cleared afterwards.
+- **Browse on map**: Zoom, move and click on markers to find meteorites and read their coordinates.
+- **Find location on map**: Click on a meteorite row to open the corresponding pop-up on the map.
+- **Statistics**: Understand the data visually by histograms of year of landing and meteorite composition.
 
 ## Technologies Used
 
