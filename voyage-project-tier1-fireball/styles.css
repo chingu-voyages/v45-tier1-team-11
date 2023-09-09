@@ -209,6 +209,7 @@
   }
   
   th {
+    width: 25%;
     border: 1px solid black;
     background-color: #15418c;
     text-align: left;
