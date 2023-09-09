@@ -220,6 +220,10 @@
     z-index: 1;
   }
 
+  th:hover {
+    background-color: #102e63;
+  }
+
   tr:hover {
     background-color: #ddd;
   }
