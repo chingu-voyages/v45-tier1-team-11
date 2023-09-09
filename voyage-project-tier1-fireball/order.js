@@ -59,10 +59,22 @@ function reorderTable(num, sortOrder) {
         const cellsB = b.cells;
         
         if (sortOrder === 'asc') {
-            return cellsA[num].textContent > cellsB[num].textContent ? 1 : -1;
+            if (num == 0 || num == 1) {
+                return cellsA[num].textContent > cellsB[num].textContent ? 1 : -1;
+            } else {
+                let temp1 = cellsA[num].textContent == "-" ? 0 : parseFloat(cellsA[num].textContent);
+                let temp2 = cellsB[num].textContent == "-" ? 0 : parseFloat(cellsB[num].textContent);
+                return temp1 > temp2 ? 1 : -1;
+            }
         } else {
-            return cellsB[num].textContent > cellsA[num].textContent ? 1 : -1;
-        }
+            if (num == 0 || num == 1) {
+                return cellsB[num].textContent > cellsA[num].textContent ? 1 : -1;
+            } else {
+                let temp1 = cellsA[num].textContent == "-" ? 0 : parseFloat(cellsA[num].textContent);
+                let temp2 = cellsB[num].textContent == "-" ? 0 : parseFloat(cellsB[num].textContent);
+                return temp2 > temp1 ? 1 : -1;
+            }
+            }
     });
 
     // Clear the existing table content
