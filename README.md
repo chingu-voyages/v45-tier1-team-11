@@ -44,6 +44,7 @@ Welcome to Fireball! This repository contains the code for a web application cal
 - Search meteorites: Search and filter by name, year of landing, composition type and mass.
 - Statistics: Histograms classifying the resulting meteorites by year and composition; number and average mass of resulting meteorites.
 - Map of meteorites: The resulting meteorites are displayed on a world map and when a row in the table of results is clicked on, the corresponding pop up is opened on the map.
+- Order meteorites: Order meteorites by name, composition, year of landing or mass in ascending/descending order.
 
 ## Installation
 
@@ -65,6 +66,7 @@ Fireball provides functionality to analyse data of meteorites. Here are some com
 - **Browse on map**: Zoom, move and click on markers to find meteorites and read their coordinates.
 - **Find location on map**: Click on a meteorite row to open the corresponding pop-up on the map.
 - **Statistics**: Understand the data visually by histograms of year of landing and meteorite composition.
+- **Order**: Click on a column head to order the rows based on that parameter. Click again to change from ascending to descending order and vice versa.
 
 ## Technologies Used
 
