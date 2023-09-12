@@ -2,6 +2,9 @@
 
 Welcome to Fireball! This repository contains the code for a web application called Fireball, a platform for users to browse and discover meteorites. Visit it at: ---
 
+![demo](https://github.com/chingu-voyages/v45-tier1-team-11/blob/main/voyage-project-tier1-fireball/utils/demo.gif)
+
+
 ## Table of Contents
 
 - [Features](#features)
@@ -40,9 +43,15 @@ Fireball provides functionality to analyse data of meteorites. Here are some com
 - **Statistics**: Understand the data visually by histograms of year of landing and meteorite composition and get the summary statistics.
 - **Order**: Click on a column head to order the rows based on that parameter. Click again to change from ascending to descending order and vice versa.
 
-## Technologies Used
+## Technologies and Libraries Used
 
 Fireball is meant to be a front end web application and it is built in HTML, CSS and Vanilla JavaScript.
+Additionally, it utilizes the following libraries:
+
+- **Mapping Library**: [Leaflet](https://leafletjs.com/)
+  - Leaflet is used to integrate interactive maps and geospatial features into Fireball.
+- **Charting Library**: [Chart.js](https://www.chartjs.org/)
+  - Chart.js is used for creating interactive and visually appealing charts within the application.
 
 ---
 
