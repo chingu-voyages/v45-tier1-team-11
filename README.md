@@ -37,7 +37,7 @@ Fireball provides functionality to analyse data of meteorites. Here are some com
 - **Read**: Look and compare the results on the table.
 - **Browse on map**: Zoom, move and click on markers to find meteorites and read their coordinates.
 - **Find location on map**: Click on a meteorite row to open the corresponding pop-up on the map.
-- **Statistics**: Understand the data visually by histograms of year of landing and meteorite composition.
+- **Statistics**: Understand the data visually by histograms of year of landing and meteorite composition and get the summary statistics.
 - **Order**: Click on a column head to order the rows based on that parameter. Click again to change from ascending to descending order and vice versa.
 
 ## Technologies Used
