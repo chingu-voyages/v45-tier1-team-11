@@ -132,7 +132,7 @@
     float: right;
     padding: 5px 10px;
     border-radius: 8px;
-    margin: 0px 20px 8px; /* Adjust the margin here to reduce the top margin */
+    margin: 0px 20px 8px; 
   }
   
   
@@ -304,9 +304,7 @@
   
   
   
-  
-  
-  
+  /*Styling for smaller Screens*/
   @media (max-width: 768px) {
     #search-section {
       flex-direction: column;
