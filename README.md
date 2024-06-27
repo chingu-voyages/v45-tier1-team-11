@@ -1,6 +1,6 @@
 # Fireball
 
-Welcome to Fireball! This repository contains the code for a web application called Fireball, a platform for users to browse and discover meteorites. [Click here to visit Fireball](https://fireball-v45-tier1-team11.netlify.app/)
+Welcome to Fireball! This repository contains the code for a web application called Fireball, a platform for users to browse and discover meteorites. [Click here to visit Fireball](https://chingu-voyages.github.io/v45-tier1-team-11/)
 
 ![demo](https://github.com/chingu-voyages/v45-tier1-team-11/blob/main/voyage-project-tier1-fireball/utils/demo.gif)
 
