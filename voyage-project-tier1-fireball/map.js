@@ -1,10 +1,10 @@
 var map = L.map("map").setView([20, 0], 2);
 L.tileLayer(
-  "https://stamen-tiles-{s}.a.ssl.fastly.net/toner-background/{z}/{x}/{y}.png",
+  'https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png',
   {
     maxZoom: 7,
     minZoom: 2,
-    attribution: '© <a href="https://stamen.com">Stamen</a> contributors',
+    attribution: '&copy; <a href="https://stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
   }
 ).addTo(map);
 
