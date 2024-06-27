@@ -30,7 +30,7 @@ Follow these steps to set up the Fireball application locally:
    git clone https://github.com/chingu-voyages/v45-tier1-team-11.git
    ```
 
-2. Use your usual method to start a server (Python or Node.js HTTP Server, Live Server from VSCode...) and access the corresponding port.
+2. Use your usual method to start a server (Node.js HTTP Server, Live Server from VSCode...) and access the corresponding port.
 
 ## Usage
 
